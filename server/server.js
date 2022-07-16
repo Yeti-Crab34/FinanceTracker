@@ -6,16 +6,20 @@ const PORT = 3002;
 
 
 //require routers
-
+const userRouter = require('./routers/userRouter');
 
 //json parse and static files
-
+app.use(express.json());
+app.use(express.static(path.resolve(__dirname, '../client')));
 
 //route handlers
+app.use('/', userRouter);
 
 
 //catch all route handlers
-
+app.use((req, res) => {
+    return res.sendStatus(404);
+});
 
 //global error handler
 app.use((err, req, res, next) => {
