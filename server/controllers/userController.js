@@ -22,7 +22,6 @@ userController.createUser = async (req, res, next) => {
     
     const createdUser = await User.query(sqlQuery, params);
 
-    res.locals.userID = createdUser.fullname;
 
     next();
   }
@@ -54,18 +53,20 @@ userController.verifyUser = async (req, res, next) => {
     if (email === undefined || password === undefined) {
       // redirect to sign up page
     }
-
+    console.log(email, password);
+    
     const sqlQuery = `SELECT * FROM users WHERE email='${email}';`
 
     const verifiedUser = await User.query(sqlQuery);
+
+
     if (verifiedUser.rows.length === 0) {
-      console.log('Wrong email/password'); 
+      console.log('Wrong email/password');  
       res.redirect(400, '/');
     }
     else {
       const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password)
       if (verifyPW) {
-        console.log('verified user');
         res.locals.fullname = verifiedUser.rows[0].fullname;
         next();
       }// TO DO else redirect to sign up page
@@ -73,8 +74,8 @@ userController.verifyUser = async (req, res, next) => {
         console.log('Wrong email/password');
         res.redirect(400, '/');
       } 
-      };
-    }
+    };
+  }
   catch (err) {
     next ('global error handler')
   }

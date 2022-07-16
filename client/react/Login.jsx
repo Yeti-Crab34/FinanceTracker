@@ -44,6 +44,7 @@ const Login = props => {
       console.log(status);
       // After successful login:
       if (status) props.changeLoginState(true);
+      else console.log('Error logging in');
     }
     catch(err) {
       console.log('Error logging in');
@@ -53,7 +54,8 @@ const Login = props => {
   const signUpBtn = () => {
     console.log('signup');
     try {
-      const status = axios.post('/signup',
+      
+      const status = axios.post('http://localhost:3002/signup',
         {fullname: fullName, email: email, password: password },
         {
           headers: {
@@ -63,9 +65,9 @@ const Login = props => {
         }
       );
       // After successful signup:
-      if(status) // what should status be?
-        props.changeLoginState(true);
-      // else 
+      if(status) props.changeLoginState(true);
+      else console.log('error signing up');
+
     }
     catch(err) {
       console.log('error signing up');
