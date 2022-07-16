@@ -32,7 +32,7 @@ const Login = props => {
   const loginBtn = async () => {
     console.log('login');
     try {
-      const status = axios.post('/login',
+      const status = await axios.post('http://localhost:3002/login',
         {email: email, password: password },
         {
           headers: {
@@ -41,12 +41,12 @@ const Login = props => {
           },
         }
       );
+      console.log(status);
       // After successful login:
-      if(status) // what should status be?
-        props.changeLoginState(true);
+      if (status) props.changeLoginState(true);
     }
     catch(err) {
-      setErr(err.message);
+      console.log('Error logging in');
     }
   };
 
@@ -68,7 +68,7 @@ const Login = props => {
       // else 
     }
     catch(err) {
-      setErr(err.message);
+      console.log('error signing up');
     }
     // After successful sign up:
     props.changeLoginState(true);

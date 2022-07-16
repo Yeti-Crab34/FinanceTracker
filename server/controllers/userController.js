@@ -22,7 +22,7 @@ userController.createUser = async (req, res, next) => {
     
     const createdUser = await User.query(sqlQuery, params);
 
-    res.locals.fullname = createdUser.fullname;
+    res.locals.userID = createdUser.fullname;
 
     next();
   }

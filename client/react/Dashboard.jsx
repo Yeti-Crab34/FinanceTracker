@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from './NavBar.jsx';
 
 class Dashboard extends React.Component {
     constructor () {
@@ -24,19 +24,23 @@ class Dashboard extends React.Component {
     render() {
         
         return (
-            <div className='aboveNav'>
-                <h1>Finance Tracker</h1>
-                <h4>Hello (insert user here)</h4>
-            </div>
+            <>
+                <div className='aboveNav'>
+                    <h1>Finance Tracker</h1>
+                    <h4>Hello (insert user here)</h4>
+                </div>
 
-            < NavBar />
-            
-            <div class="dashboardcontainer">
-                <div class="Graph"></div>
-                <div class="expenses"></div>
-                <div class="incomes"></div>
-            </div>
+                < NavBar />
+                
+                <div className="dashboardcontainer">
+                    <div className="Graph">Graph</div>
+                    <div className="expenses">Expenses</div>
+                    <div className="incomes">Income</div>
+                </div>
+            </>
 
         )
     }
 }
+
+export default Dashboard; 

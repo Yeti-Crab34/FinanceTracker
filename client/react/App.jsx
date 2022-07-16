@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 // import NavBar from './NavBar.jsx';
-import Login from './Login.jsx';
-// import Register from './Register.js';
 // import Content from './Content.js';
 // import Error from './Error.js';
+import Login from './Login.jsx';
+import Dashboard from './Dashboard.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
