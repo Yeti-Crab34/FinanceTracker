@@ -21,6 +21,9 @@ userController.createUser = async (req, res, next) => {
       VALUES ($1, $2, $3);`;
     
     const createdUser = await User.query(sqlQuery, params);
+
+    res.locals.user_id = createdUser._id;
+
     next();
   }
    /* 
@@ -51,31 +54,44 @@ userController.verifyUser = async (req, res, next) => {
     if (email === undefined || password === undefined) {
       // redirect to sign up page
     }
-
+    console.log(email, password);
+    
     const sqlQuery = `SELECT * FROM users WHERE email='${email}';`
 
     const verifiedUser = await User.query(sqlQuery);
+
+
     if (verifiedUser.rows.length === 0) {
-      console.log('Wrong email/password'); 
+      console.log('Wrong email/password');  
       res.redirect(400, '/');
     }
     else {
       const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password)
       if (verifyPW) {
-        console.log('verified user');
+        res.locals.user_id = verifiedUser.rows[0]._id;
         next();
       }// TO DO else redirect to sign up page
       else {
         console.log('Wrong email/password');
         res.redirect(400, '/');
       } 
-      };
-    }
+    };
+  }
   catch (err) {
     next ('global error handler')
   }
 };
 
+userController.getUser = async (req, res, next) => { // assumes access to _id in Dashboard.jsx
+  try { 
+    const sqlQuery = `SELECT * FROM Users WHERE _id='${req.params.user_id}'`
+    const currUser = await User.query(sqlQuery);
+    res.send(currUser); 
+  }
+  catch {
+
+  }
+}
 
 module.exports = userController;
 
