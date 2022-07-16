@@ -21,6 +21,9 @@ userController.createUser = async (req, res, next) => {
       VALUES ($1, $2, $3);`;
     
     const createdUser = await User.query(sqlQuery, params);
+
+    res.locals.fullname = createdUser.fullname;
+
     next();
   }
    /* 
@@ -63,6 +66,7 @@ userController.verifyUser = async (req, res, next) => {
       const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password)
       if (verifyPW) {
         console.log('verified user');
+        res.locals.fullname = verifiedUser.rows[0].fullname;
         next();
       }// TO DO else redirect to sign up page
       else {
