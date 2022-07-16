@@ -7,7 +7,7 @@ const cookieController = {};
 cookieController.setUserSSIDCookie = (req, res, next) => {
   //added destructuring based on approach lecture
   const id = res.locals.user_id;
-  res.cookie('SSID', id, { secure: true });
+  res.cookie('SSID', id);
   return next(); 
 }
 

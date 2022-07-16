@@ -13,12 +13,12 @@ class Dashboard extends React.Component {
 
     async getName() {
         
-        const name = await axios.get('/info', {
+        const name = await axios.get('/info', {withCredentials: true}, {
             params: {
                 user_id: _id // needs access to _id from cookies
             }
         }).then(res => {
-
+            
         })
     }
 

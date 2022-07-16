@@ -18,7 +18,7 @@ const App = () => {
   return (
     <main className='App'>
       {/* {!userLoggedIn  */}
-      {false
+      {!userLoggedIn
         ? <> 
             <h1 className='app-title' >Finance Tracker App</h1>
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
