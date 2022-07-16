@@ -123,45 +123,46 @@ body {
     box-shadow: none;
   }
 
-  .anim-slide-left {
-    animation: slide-left .7s;
-    animation-fill-mode: forwards;
-  }
+    // Login page slide animations
+      .anim-slide-left {
+        animation: slide-left .7s;
+        animation-fill-mode: forwards;
+      }
 
-  @keyframes slide-left {
-    from {margin-left : 50%}
-    to {margin-left : 0%}
-  }
+      @keyframes slide-left {
+        from {margin-left : 50%}
+        to {margin-left : 0%}
+      }
 
-  .anim-login-slide-left {
-    animation: login-slide-left .7s;
-    animation-fill-mode: forwards;
-  }
+      .anim-login-slide-left {
+        animation: login-slide-left .7s;
+        animation-fill-mode: forwards;
+      }
 
-  @keyframes login-slide-left {
-    from {margin-left : 0%}
-    to {margin-left : 100%}
-  }
+      @keyframes login-slide-left {
+        from {margin-left : 0%}
+        to {margin-left : 100%}
+      }
 
-  .anim-slide-right {
-    animation: slide-right .7s;
-    animation-fill-mode: forwards;
-  }
+      .anim-slide-right {
+        animation: slide-right .7s;
+        animation-fill-mode: forwards;
+      }
 
-  @keyframes slide-right {
-    from {margin-left : 0%}
-    to {margin-left : 50%}
-  }
+      @keyframes slide-right {
+        from {margin-left : 0%}
+        to {margin-left : 50%}
+      }
 
-  .anim-login-slide-right {
-    animation: login-slide-right .7s;
-    animation-fill-mode: forwards;
-  }
+      .anim-login-slide-right {
+        animation: login-slide-right .7s;
+        animation-fill-mode: forwards;
+      }
 
-  @keyframes login-slide-right {
-    from {margin-left : 100%}
-    to {margin-left : 0%}
-  }
+      @keyframes login-slide-right {
+        from {margin-left : 100%}
+        to {margin-left : 0%}
+      }
   
   .right .off:hover {
     background: #eee;
@@ -256,3 +257,34 @@ body {
       0 0 0 3px #2C3034;
   }
 }
+
+
+.dashboardcontainer {  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Graph expenses"
+    "Graph incomes";
+
+  .Graph {
+    grid-area: Graph; 
+    background-color: black;
+    border-radius: 15px; 
+  }
+
+  .expenses { 
+    grid-area: expenses;
+    background-color: blue;
+    border-radius: 15px;
+  }
+  
+  .incomes {
+    grid-area: incomes; 
+    background-color: green;
+    border-radius: 15px;
+  }
+}
+
+

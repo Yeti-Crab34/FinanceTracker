@@ -17,7 +17,7 @@ module.exports = {
       directory: path.join(__dirname, 'build'),
     },
     proxy: {
-      '/api': 'http://localhost:3002',
+      '/': 'http://localhost:3002',
     },
   },
   plugins: [
