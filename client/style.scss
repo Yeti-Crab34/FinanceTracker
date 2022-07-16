@@ -124,11 +124,42 @@ body {
   }
 
   .anim-slide-left {
-    animation: slide-left 1s;
+    animation: slide-left .7s;
+    animation-fill-mode: forwards;
   }
 
   @keyframes slide-left {
     from {margin-left : 50%}
+    to {margin-left : 0%}
+  }
+
+  .anim-login-slide-left {
+    animation: login-slide-left .7s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes login-slide-left {
+    from {margin-left : 0%}
+    to {margin-left : 100%}
+  }
+
+  .anim-slide-right {
+    animation: slide-right .7s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes slide-right {
+    from {margin-left : 0%}
+    to {margin-left : 50%}
+  }
+
+  .anim-login-slide-right {
+    animation: login-slide-right .7s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes login-slide-right {
+    from {margin-left : 100%}
     to {margin-left : 0%}
   }
   

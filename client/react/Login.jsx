@@ -1,31 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Login = props => {
 
-
-  const slide = direction => {
-    if (direction === 'right') {
-      console.log(direction);
-      document.querySelector('#slideBox').animate({
-        'marginLeft' : '0'
-      });
-      // $('.topLayer').animate({
-      //   'marginLeft' : '100%'
-      // });
-    } else {
-      
-      // $('#slideBox').animate({
-      //   'marginLeft' : '50%'
-      // });
-      // $('.topLayer').animate({
-      //   'marginLeft': '0'
-      // });
-    }
-  }
+  const [loginSlide, slideDirection] = useState(false);
 
   useEffect(() => {
-
-  }, [])
+    if (loginSlide === 'left') {
+      const box = document.querySelector('#slideBox');
+      const top = document.querySelector('.topLayer');
+      box.classList.remove('anim-slide-right');
+      top.classList.remove('anim-login-slide-right')
+      box.classList.add('anim-slide-left');
+      top.classList.add('anim-login-slide-left')
+    } else if (loginSlide === 'right') {
+      const box = document.querySelector('#slideBox');
+      const top = document.querySelector('.topLayer');
+      box.classList.remove('anim-slide-left');
+      top.classList.remove('anim-login-slide-left')
+      box.classList.add('anim-slide-right');
+      top.classList.add('anim-login-slide-right')
+    }
+  }, [loginSlide])
 
   return (
     <div className="loginContent">
@@ -34,7 +29,7 @@ const Login = props => {
         <div className="backLeft"></div>
       </div>
 
-      <div id="slideBox">
+      <div id="slideBox" onAnimationEnd={console.log('Animation End?')}>
         <div className="topLayer">
           <div className="left">
             <div className="content">
@@ -48,7 +43,7 @@ const Login = props => {
                 <div className="form-group"></div>
                 <div className="form-group"></div>
               {/* </form> */}
-              <button id="goLeft" className="off" onClick={slide("left")}>Login</button>
+              <button id="goLeft" className="off" onClick={() => slideDirection('right')}>Login</button>
               <button id="signup" onClick="window.location.href='/auth/google'">Sign up</button>
               <button type="button" className="login-with-google-btn" onClick="window.location.href='/auth/google'">
                 Sign in with Google
@@ -64,7 +59,7 @@ const Login = props => {
                   <input type="text" placeholder="Password" />
                 </div>
                 <button id="login" type="submit" onClick="window.location.href='/auth/google'">Log in</button>
-                <button id="goRight" className="off" onClick={() => slide("right")}>Sign Up</button>
+                <button id="goRight" className="off" onClick={() => slideDirection('left')}>Sign Up</button>
                 <button type="button" className="login-with-google-btn" onClick="window.location.href='/auth/google'">
                   Sign up with Google
                 </button>
