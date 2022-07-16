@@ -22,6 +22,7 @@ userController.createUser = async (req, res, next) => {
     
     const createdUser = await User.query(sqlQuery, params);
 
+    res.locals.user_id = createdUser._id;
 
     next();
   }
@@ -67,7 +68,7 @@ userController.verifyUser = async (req, res, next) => {
     else {
       const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password)
       if (verifyPW) {
-        res.locals.fullname = verifiedUser.rows[0].fullname;
+        res.locals.user_id = verifiedUser.rows[0]._id;
         next();
       }// TO DO else redirect to sign up page
       else {
@@ -81,6 +82,16 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+userController.getUser = async (req, res, next) => { // assumes access to _id in Dashboard.jsx
+  try { 
+    const sqlQuery = `SELECT * FROM Users WHERE _id='${req.params.user_id}'`
+    const currUser = await User.query(sqlQuery);
+    res.send(currUser); 
+  }
+  catch {
+
+  }
+}
 
 module.exports = userController;
 

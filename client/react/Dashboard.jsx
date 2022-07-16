@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
+import axios from 'axios';
 
 class Dashboard extends React.Component {
     constructor () {
@@ -12,6 +13,13 @@ class Dashboard extends React.Component {
 
     async getName() {
         
+        const name = await axios.get('/info', {
+            params: {
+                user_id: _id // needs access to _id from cookies
+            }
+        }).then(res => {
+
+        })
     }
 
     async getExpenses() {
