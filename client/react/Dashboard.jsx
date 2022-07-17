@@ -65,7 +65,6 @@ class Dashboard extends React.Component {
                     incomes: incomeArr,
                 })
             }
-            
         }); 
     }
 
