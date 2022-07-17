@@ -17,22 +17,29 @@ const App = () => {
 
   return (
     <main className='App'>
-      {/* {!userLoggedIn  */}
-      {false
+      {
+      //If user is not logged in,
+      !userLoggedIn
+        // Render the login page,
         ? <> 
-            <h1 className='app-title' >Finance Tracker App</h1>
+            <h1 className='app-title' >
+              <span className='big-letter'>F</span>INANCE 
+              <span className='big-letter'>U</span>SAGE
+              <span className='big-letter'>C</span>HARTS
+            </h1>
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>
+        // Otherwise render the Dashboard
         : <>
-            < NavBar />
+            {/*< NavBar />*/}
             < Routes >
-              {/* < Route path="/tracker" element={< Tracker />}/> */}
+              {/* < Route path="/" element={< />}/> */}
               < Route path="/content" element={< div />}/>
+              
               < Route path="/" element={<h1 className='homepage'>Dashboard</h1>}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
-            < Dashboard >
-            </ Dashboard >
+            < Dashboard />
           </>
       }
     </main>

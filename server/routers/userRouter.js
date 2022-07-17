@@ -18,8 +18,9 @@ userRouter.post('/login',
         return res.status(200).send(true).json();
 });
 
-userRouter.get('/info', userController.getUser, (req, res) => {
-    return res.status(200).send(); // wait
+userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); return next()}, userController.getUser, (req, res) => {
+
+    return res.status(200).send(res.locals); 
 });
 
 

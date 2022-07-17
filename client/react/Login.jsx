@@ -32,14 +32,15 @@ const Login = props => {
   const loginBtn = async () => {
     console.log('login');
     try {
-      const status = await axios.post('http://localhost:3002/login',
+      const status = await axios.post('http://localhost:3002/login', 
         {email: email, password: password },
         {
+          withCredentials: true, 
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json', 
           },
-        }
+        }, 
       );
       console.log(status);
       // After successful login:
@@ -77,11 +78,7 @@ const Login = props => {
 
   return (
     <div className="loginContent">
-      {/* <div id="back">
-        <div className="backRight"></div>
-        <div className="backLeft"></div>
-      </div> */}
-
+      <div id="back"></div> 
       <div id="slideBox">
         <div className="topLayer">
           <div className="left">
