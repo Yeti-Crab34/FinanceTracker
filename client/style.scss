@@ -1,6 +1,6 @@
 body {
     height: 100%;
-    overflow: hidden;
+    overflow: scroll;
     width: 100% !important;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -279,14 +279,24 @@ body {
 
   .expenses { 
     grid-area: expenses;
-    background-color: blue;
-    border-radius: 15px;
   }
   
   .incomes {
     grid-area: incomes; 
-    background-color: green;
+  }
+
+  .expenses, .incomes {
     border-radius: 15px;
+    border: solid black 1px; 
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 5%;
+    
+    .expenseItem, .incomeItem {
+      margin: 2.5%;
+      border-radius: 15px;
+      padding: 5px;
+      border: solid black 1px;
+    }
   }
 }
 

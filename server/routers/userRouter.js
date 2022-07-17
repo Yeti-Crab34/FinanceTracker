@@ -19,8 +19,8 @@ userRouter.post('/login',
 });
 
 userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); return next()}, userController.getUser, (req, res) => {
-    const name = res.locals.currUser;
-    return res.status(200).send(name); // wait
+
+    return res.status(200).send(res.locals); 
 });
 
 

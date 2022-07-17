@@ -89,8 +89,15 @@ userController.getUser = async (req, res, next) => {
     console.log(target_id);
     const sqlQuery = `SELECT * FROM Users WHERE _id='${target_id}'`
     const currUser = await User.query(sqlQuery);
+    //console.log(currUser.rows[0]);
+    const expQuery = `SELECT * FROM Expense WHERE user_id=${target_id}`
+    const expenses = await User.query(expQuery); 
+    //console.log(expenses.rows);
+    const incQuery = `SELECT * FROM Income WHERE user_id=${target_id}`
+    const incomes = await User.query(incQuery);
     res.locals.currUser = currUser.rows[0].fullname; 
-    console.log("currUser", res.locals.currUser);
+    res.locals.currExpenses = expenses.rows;
+    res.locals.currIncomes = incomes.rows;
     return next();
   }
   catch {

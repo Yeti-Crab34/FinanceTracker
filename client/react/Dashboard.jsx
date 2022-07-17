@@ -8,7 +8,9 @@ class Dashboard extends React.Component {
         super();
 
         this.state = {
-            name: ''
+            name: '',
+            expenses: [],
+            incomes: []
         }
 
         //this.getName = this.getName.bind(this);
@@ -34,8 +36,33 @@ class Dashboard extends React.Component {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
+                console.log(res.data.currExpenses);
+                const expenseArr = [];
+                for(const expense of res.data.currExpenses) {
+                    expenseArr.push(
+                        <div className='expenseItem'>
+                            <span className='expenseName'>{expense.item}: </span>
+                            <span className='expenseAmt'>{expense.value}</span>
+                            <br />
+                            <span className='recurring'>Occurs {expense.recurring}</span> 
+                        </div>
+                    );
+                }
+                const incomeArr = [];
+                for(const income of res.data.currIncomes) {
+                    incomeArr.push(
+                        <div className="incomeItem">
+                            <span className="expenseName">{income.item}: </span>
+                            <span className="incomeAmt">{income.value}</span>
+                            <br />
+                            <span className="recurring">Occurs {income.recurring}</span>
+                        </div>
+                    );
+                }
                 this.setState({ 
-                    name: res.data
+                    name: res.data.currUser,
+                    expenses: expenseArr,
+                    incomes: incomeArr,
                 })
             }
             
@@ -54,8 +81,8 @@ class Dashboard extends React.Component {
                 
                 <div className="dashboardcontainer">
                     <div className="Graph">Graph</div>
-                    <div className="expenses">Expenses</div>
-                    <div className="incomes">Income</div>
+                    <div className="expenses">{this.state.expenses}</div>
+                    <div className="incomes">{this.state.incomes}</div>
                 </div>
             </>
 
