@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
-  const [userLoggedIn, changeLoginState] = useState(false);
+  const [userLoggedIn, changeLoginState] = useState(document.cookie.length > 0);
 
   useEffect(() => {
     console.log('login: ' + userLoggedIn);
