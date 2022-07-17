@@ -8,12 +8,12 @@ const NavBar = props => {
     <> 
       <div className="nav"> 
         <div><Link className="nav-link" to="/">Dashboard</Link></div>
-        <div><Link className="nav-link" to="/tracker">Income</Link></div>
-        <div><Link className="nav-link" to="/content">Expenses</Link></div>
-        <div><Link className="nav-link" to="/spongebob">Net</Link></div>
-        <div><Link className="nav-link" to="/login">Assets</Link></div>
-        <div><Link className="nav-link" to="/login">Investments</Link></div>
-        <div><Link className="nav-link" to="/login">Account</Link></div>
+        <div><Link className="nav-link" to="/income">Income</Link></div>
+        <div><Link className="nav-link" to="/expenses">Expenses</Link></div>
+        <div><Link className="nav-link" to="/net">Net</Link></div>
+        <div><Link className="nav-link" to="/assets">Assets</Link></div>
+        <div><Link className="nav-link" to="/investments">Investments</Link></div>
+        <div><Link className="nav-link" to="/account">Account</Link></div>
       </div>
     </>
   )

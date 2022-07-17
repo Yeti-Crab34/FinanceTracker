@@ -78,11 +78,7 @@ const Login = props => {
 
   return (
     <div className="loginContent">
-      {/* <div id="back">
-        <div className="backRight"></div>
-        <div className="backLeft"></div>
-      </div> */}
-
+      <div id="back"></div> 
       <div id="slideBox">
         <div className="topLayer">
           <div className="left">
