@@ -82,14 +82,20 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
-userController.getUser = async (req, res, next) => { // assumes access to _id in Dashboard.jsx
+userController.getUser = async (req, res, next) => { 
+  console.log('in getUser');
   try { 
-    const sqlQuery = `SELECT * FROM Users WHERE _id='${req.params.user_id}'`
+    const target_id = req.query.user_id;
+    console.log(target_id);
+    const sqlQuery = `SELECT * FROM Users WHERE _id='${target_id}'`
     const currUser = await User.query(sqlQuery);
-    res.send(currUser); 
+    res.locals.currUser = currUser.rows[0].fullname; 
+    console.log("currUser", res.locals.currUser);
+    return next();
   }
   catch {
-
+    console.log('caught');
+    return next('could not get user');
   }
 }
 

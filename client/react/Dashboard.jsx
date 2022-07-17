@@ -7,19 +7,12 @@ class Dashboard extends React.Component {
     constructor () {
         super();
 
-        this.getName = this.getName.bind(this);
-        this.getExpenses = this.getExpenses.bind(this); 
-    }
+        this.state = {
+            name: ''
+        }
 
-    async getName() {
-        
-        const name = await axios.get('/info', {withCredentials: true}, {
-            params: {
-                user_id: _id // needs access to _id from cookies
-            }
-        }).then(res => {
-            
-        })
+        //this.getName = this.getName.bind(this);
+        this.getExpenses = this.getExpenses.bind(this); 
     }
 
     async getExpenses() {
@@ -27,15 +20,34 @@ class Dashboard extends React.Component {
         const { deconstruct } = data;
     }
 
-
+    componentDidMount() {
+        console.log('mounting');
+        const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
+        console.log("id:", id);
+        axios.get('http://localhost:3002/info', 
+            {
+                params: {
+                    user_id: id,
+                }
+            },
+        )
+        .then((res, err) => {
+            if(err) console.log('err:', err); 
+            else {
+                this.setState({ 
+                    name: res.data
+                })
+            }
+            
+        }); 
+    }
 
     render() {
-        
         return (
             <>
                 <div className='aboveNav'>
                     <h1>Finance Tracker</h1>
-                    <h4>Hello (insert user here)</h4>
+                    <h4>Hello { this.state.name }</h4>
                 </div>
 
                 < NavBar />

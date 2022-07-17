@@ -31,8 +31,7 @@ const App = () => {
               < Route path="/" element={<h1 className='homepage'>Dashboard</h1>}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
-            < Dashboard >
-            </ Dashboard >
+            < Dashboard />
           </>
       }
     </main>
