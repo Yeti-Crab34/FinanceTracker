@@ -30,17 +30,17 @@ const App = () => {
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>
         // Otherwise render the Dashboard
-        : <>
+        : <div className='dashboard-container'>
             {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/" element={< />}/> */}
-              < Route path="/content" element={< div />}/>
+              < Route path="/income" element={< div />}/>
               
               < Route path="/" element={<h1 className='homepage'>Dashboard</h1>}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
             < Dashboard />
-          </>
+          </div>
       }
     </main>
   )
