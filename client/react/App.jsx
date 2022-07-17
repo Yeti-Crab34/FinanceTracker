@@ -24,7 +24,7 @@ const App = () => {
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>
         : <>
-            < NavBar />
+            {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/tracker" element={< Tracker />}/> */}
               < Route path="/content" element={< div />}/>

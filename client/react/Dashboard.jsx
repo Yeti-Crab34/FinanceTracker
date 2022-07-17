@@ -73,8 +73,8 @@ class Dashboard extends React.Component {
         return (
             <>
                 <div className='aboveNav'>
-                    <h1>Finance Tracker</h1>
-                    <h4>Hello { this.state.name }</h4>
+                    <span className="titleName">Finance Tracker</span>
+                    <span className="greeting">Hello { this.state.name }</span>
                 </div>
 
                 < NavBar />

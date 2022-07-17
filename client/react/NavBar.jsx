@@ -6,12 +6,14 @@ const NavBar = props => {
 
   return (
     <> 
-      <div className="nav">NavBar
-        <Link className="nav-link" to="/">Dashboard</Link>
-        <Link className="nav-link" to="/tracker">Project Tracker</Link>
-        <Link className="nav-link" to="/content">Page 2</Link>
-        <Link className="nav-link" to="/spongebob">A</Link>
-        <Link className="nav-link" to="/login">Login</Link>
+      <div className="nav"> 
+        <div><Link className="nav-link" to="/">Dashboard</Link></div>
+        <div><Link className="nav-link" to="/tracker">Income</Link></div>
+        <div><Link className="nav-link" to="/content">Expenses</Link></div>
+        <div><Link className="nav-link" to="/spongebob">Net</Link></div>
+        <div><Link className="nav-link" to="/login">Assets</Link></div>
+        <div><Link className="nav-link" to="/login">Investments</Link></div>
+        <div><Link className="nav-link" to="/login">Account</Link></div>
       </div>
     </>
   )
