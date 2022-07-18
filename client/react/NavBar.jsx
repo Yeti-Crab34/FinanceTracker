@@ -22,9 +22,7 @@ const NavBar = props => {
         <div><Link className="nav-link" to="/">Dashboard</Link></div>
         <div><Link className="nav-link" to="/income">Income</Link></div>
         <div><Link className="nav-link" to="/expenses">Expenses</Link></div>
-        <div><Link className="nav-link" to="/net">Net</Link></div>
-        <div><Link className="nav-link" to="/assets">Assets</Link></div>
-        <div><Link className="nav-link" to="/investments">Investments</Link></div>
+        <div><Link className="nav-link" to="/assets">Assets/Investments</Link></div>
         <div><Link className="nav-link" to="/" onClick={logOut}>Logout</Link></div>
       </div>
     </>

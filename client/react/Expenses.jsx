@@ -3,7 +3,7 @@ import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
 const Expenses = props => {
-    const [expenses, setExpenses] = useState([]); 
+    const {expenses, changeExpenses} = props;
     const [userID, setID] = useState('');
     
     /* 
@@ -37,7 +37,7 @@ const Expenses = props => {
                         </div>
                     );
                 }
-                setExpenses(expenseArr); 
+                changeExpenses(expenseArr); 
             }
         }); 
     }, [successfulPost]);
@@ -75,13 +75,13 @@ const Expenses = props => {
                 {expenses}  
             </div>
             <div className="input-div">
-                <label for="expenseItem">Expense Name: </label>
+                <label >Expense Name: </label>
                 <input type="text" name="expenseItem" id="expenseItem" placeholder="Expense name"
                 onChange={e => setItem(e.target.value)}/>
-                <label for="expenseAmount">Amount: </label>
+                <label >Amount: </label>
                 <input type="text" name="expenseAmount" id="expenseAmt" placeholder="Expense amount"
                 onChange={e => setAmt(e.target.value)}/>
-                <label for="reoccurence">Reoccuring? </label>
+                <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>
