@@ -23,5 +23,9 @@ userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); ret
     return res.status(200).send(res.locals); 
 });
 
+userRouter.post('/addExpense', userController.addExpense, (req, res) => {
+    return res.status(200); 
+})
+
 
 module.exports = userRouter;

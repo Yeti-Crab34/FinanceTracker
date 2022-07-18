@@ -106,6 +106,22 @@ userController.getUser = async (req, res, next) => {
   }
 }
 
+userController.addExpense = async(req, res, next) => {
+  try {
+    const { item, amount, recurrence, id } = req.body;
+    const params = [item, recurrence, amount, '7/16/2022', id]; 
+    const sqlQuery = `
+      INSERT INTO Expense (item, recurring, value, created, user_id) 
+      VALUES ($1, $2, $3, $4, $5);
+      `;
+    const expQuery = await User.query(sqlQuery, params); 
+    return next();
+  }
+  catch {
+    return next('could not add expense')
+  }
+}
+
 module.exports = userController;
 
 

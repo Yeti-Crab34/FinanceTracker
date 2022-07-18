@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import Login from './Login.jsx';
 import Dashboard from './Dashboard.jsx';
+import Expenses from './Expenses.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -35,6 +36,7 @@ const App = () => {
             {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/" element={< />}/> */}
+              < Route path="/expenses" element={ <Expenses /> }/>
               < Route path="/income" element={< div />}/>
               < Route path="/logout" element={< div />}/> 
               < Route path="/" element={< Dashboard />}/>

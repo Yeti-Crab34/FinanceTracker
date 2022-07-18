@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
+
+
 class Dashboard extends React.Component {
     constructor () {
         super();
@@ -13,13 +15,6 @@ class Dashboard extends React.Component {
             incomes: []
         }
 
-        //this.getName = this.getName.bind(this);
-        this.getExpenses = this.getExpenses.bind(this); 
-    }
-
-    async getExpenses() {
-        const data = (await fetch('/:user/expenses')).json(); //want value and created (date);
-        const { deconstruct } = data;
     }
 
     componentDidMount() {
