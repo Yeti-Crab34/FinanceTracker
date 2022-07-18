@@ -29,6 +29,7 @@ const Login = props => {
     }
   }, [loginSlide]);
 
+  
   const loginBtn = async () => {
     console.log('login');
     try {
