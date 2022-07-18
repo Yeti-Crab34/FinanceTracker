@@ -5,9 +5,10 @@ const cookieController = {};
 * setSSIDCookie - store the user id in a cookie
 */
 cookieController.setUserSSIDCookie = (req, res, next) => {
-  //added destructuring based on approach lecture
+  console.log('setting cookie', res.locals.user_id);
   const id = res.locals.user_id;
   res.cookie('SSID', id);
+  console.log(res.cookie);
   return next(); 
 }
 

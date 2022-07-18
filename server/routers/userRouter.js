@@ -7,8 +7,8 @@ const cookieController = require('../controllers/cookieController');
 userRouter.post('/signup', 
     userController.createUser, 
     cookieController.setUserSSIDCookie, (req, res) => {
-        // TO DO REDIRECT TO DASHBOARD PAGE
-        return res.status(200).send(true).json();
+    console.log('done with middleware chain, about to send response to frontend');
+    return res.status(200).send(true).json();
 });
 
 userRouter.post('/login', 

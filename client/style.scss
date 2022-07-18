@@ -324,9 +324,19 @@ height: auto;
   
   .Graph {
     grid-area: Graph; 
-    background-color: rgba(15, 15, 15, 0.99);
+    background-color: rgba(255, 255, 255, 0.844);
     border-radius: 15px; 
     margin:3px;
+    .chartWrapper {
+      display: block;
+      position: relative;
+      width: 75%;
+      margin: 2.5% auto;
+      /*canvas {
+        margin-left: 50%;
+        margin-top: 30%;
+      }*/
+    }
   }
 
   .expenses { 

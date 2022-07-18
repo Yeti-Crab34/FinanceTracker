@@ -18,12 +18,13 @@ userController.createUser = async (req, res, next) => {
     const params = [ fullname, hashedPW, email ];
     const sqlQuery = `
       INSERT INTO users (fullname, password, email) 
-      VALUES ($1, $2, $3);`;
+      VALUES ($1, $2, $3) RETURNING *;`;
     
     const createdUser = await User.query(sqlQuery, params);
 
-    res.locals.user_id = createdUser._id;
-
+    console.log(createdUser.rows[0]._id);
+    res.locals.user_id = createdUser.rows[0]._id;
+    console.log('about to go to cookie middleware with', res.locals.user_id);
     next();
   }
    /* 
@@ -95,9 +96,16 @@ userController.getUser = async (req, res, next) => {
     //console.log(expenses.rows);
     const incQuery = `SELECT * FROM Income WHERE user_id=${target_id}`
     const incomes = await User.query(incQuery);
+    const totalIncQuery = `SELECT value FROM Income WHERE user_id=${target_id}`
+    const totalExpQuery = `SELECT value FROM Expense WHERE user_id=${target_id}`
+    const totalInc = await User.query(totalIncQuery);
+    const totalExp = await User.query(totalExpQuery);  
     res.locals.currUser = currUser.rows[0].fullname; 
     res.locals.currExpenses = expenses.rows;
     res.locals.currIncomes = incomes.rows;
+    
+    res.locals.totalExpenses = totalExp.rows;
+    res.locals.totalIncomes = totalInc.rows; 
     return next();
   }
   catch {
