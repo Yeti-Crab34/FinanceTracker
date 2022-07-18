@@ -17,15 +17,40 @@ body {
     width: 100% !important;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background: $lightBeige url(cityStreet1.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 48% 40%;
     margin-left: 0;
   }
 
 .App {
   display: flex;
+}
+
+#city-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100% !important;
+  box-sizing: border-box;
+  background: $lightBeige url(cityStreet1.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 48% 40%;
+  margin: 0;
+  z-index: -1;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100% !important;
+  box-sizing: border-box;
+  background: $lightBeige url(Beige-texture.jpg);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  margin: 0;
+  z-index: -1;
 }
 
 .app-title {
@@ -232,19 +257,19 @@ body {
     font-size: 1.5rem;
     font-weight: bolder;
     margin-top: auto;
-    color: #191919;
+    color: #3c3c3c;
   }
 }
 
 .homepage {
 
-background-color: #c4cfbb54;
+// background-color: #c4cfbb54;
 height: auto;
 
 .titleName {
   font-size: 3rem;
   margin: 3px 0px 5px 4px;
-  background-color: #c4cfbbf6;
+  // background-color: #c4cfbbf6;
   color: #003755;
   font-family: 'Encode Sans';
   padding: 0px 10px;
@@ -255,7 +280,7 @@ height: auto;
 .nav {
   border-radius: 15px;
   border: solid black 1px; 
-  background-color: rgba(12, 12, 12, 0.809);
+  background-color: rgba(12, 12, 12, 0.89);
   margin: 0px 0px 1.5vh 3px;
   display: inline-flex;
   justify-content: space-evenly;
@@ -333,20 +358,36 @@ height: auto;
   }
 }}
 
-.expenses-page {
-  
+.expenses-page, .income-page{
+  display: block;
+  // background-color: $darkBeige;
 
-  .expenseItem {
+  .history-container {
+    height: 80vh;
+    overflow: auto;
+    background-color: #f2eee3c5;
+    margin: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 2px 2px 10px rgb(0, 0, 0);
 
-    span {
-
+    .expenseItem {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      
+      span {
+        border: 1px solid black;
+        padding: 3px
+      }
     }
   }
 
-  #input-div {
-
+  .input-div {
+    background-color: #003755;
+    padding: 5px;
+    display: flex; 
+    justify-content: space-around;
     input {
-
+      
     }
     
     select{

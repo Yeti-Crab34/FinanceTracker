@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
 const Expenses = props => {
@@ -34,7 +35,6 @@ const Expenses = props => {
                         <div id={id++} className='expenseItem'>
                             <span className='expenseName'>{expense.item}: </span>
                             <span className='expenseAmt'>{expense.value}</span>
-                            <br />
                             <span className='recurring'>Occurs {expense.recurring}</span> 
                         </div>
                     );
@@ -73,15 +73,21 @@ const Expenses = props => {
         amountInput.value = '';
     }
     
+    // renders all the expenses a user has and the input fields for adding a new expense
     return (
-        // renders all the expenses a user has and the input fields for adding a new expense
         <div className='expenses-page'>
-            {expenses}
-            <div className="inputs" id="input-div">
-                <input type="text" placeholder="Expense item" id="expenseItem" 
+            < NavBar />
+            <div className='history-container'>
+                {expenses}  
+            </div>
+            <div className="input-div">
+                <label for="expenseItem">Expense Name: </label>
+                <input type="text" name="expenseItem" id="expenseItem" 
                 onChange={e => setItem(e.target.value)}/>
-                <input type="text" placeholder="Expense amount" id="expenseAmt" 
+                <label for="expenseAmount">Amount: </label>
+                <input type="text" name="expenseAmount" id="expenseAmt" 
                 onChange={e => setAmt(e.target.value)}/>
+                <label for="reoccurence">Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>
@@ -89,8 +95,8 @@ const Expenses = props => {
                     <option value='Monthly'>Monthly</option>
                     <option value='Annually'>Annually</option>
                 </select>
+                <button onClick={addExpense}>Add Expense</button>
             </div>
-            <button onClick={addExpense}>Add Expense</button>
         </div>    
     )
 }

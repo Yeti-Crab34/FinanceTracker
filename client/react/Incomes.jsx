@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
 const Incomes = props => {
@@ -40,7 +41,7 @@ const Incomes = props => {
                     );
                 }
                 setIncomes(incomeArr); 
-                console.log(incomes);
+                console.log('Incomes sate', incomes);
             }
         }); 
     }, [successfulPost]);
@@ -50,7 +51,7 @@ const Incomes = props => {
     const [amount, setAmt] = useState('');
     const [recurrence, setRec] = useState('');
     
-    const addIncome = async () => {
+    const addIncome = () => {
         if (item.length === 0) {alert('Please enter a valid item'); return;}
         if (!/^\d+\.{0,1}\d{0,2}$/.test(amount)) {alert('Please enter a valid amount'); return;}
         axios.post('http://localhost:3002/addIncome', 
@@ -61,22 +62,38 @@ const Incomes = props => {
                 id: userID,
             }).then((res) => {
                 console.log('Successful addIncome');
-            })
-      console.log(result);
+                postSuccess(res);
+                console.log(res);
+            }).catch((err) => {console.log(err)});
+
+        // clearing the input fields after successfully posting new income to database    
+        const itemInput = document.getElementById('incomeItem');
+        const amountInput = document.getElementById('incomeAmt');
+        itemInput.value = '';
+        amountInput.value = '';
     }
-    
+
+     // renders all the income a user has and the input fields for adding a new income
     return (
-        <div>
-            {incomes}
-            <div classname="inputs" id="input-div">
+        <div className='income-page'>
+            < NavBar />
+             <div className='history-container'>
+                {incomes}
+            </div>
+            <div className="input-div">
                 <input type="text" placeholder="Income item" id="incomeItem" 
                 onChange={e => setItem(e.target.value)}/>
                 <input type="text" placeholder="Income amount" id="incomeAmt" 
                 onChange={e => setAmt(e.target.value)}/>
-                <input type="text" placeholder="Income recurrence" id="incomeRec" 
-                onChange={e => setRec(e.target.value)}/>
+                <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
+                    <option value='Once'>Once</option>
+                    <option value='Daily'>Daily</option>
+                    <option value='Weekly'>Weekly</option>
+                    <option value='Monthly'>Monthly</option>
+                    <option value='Annually'>Annually</option>
+                </select>
+                <button onClick={addIncome}>Add Income</button>
             </div>
-            <button onClick={addIncome}>Add Income</button>
         </div>    
     )
 }

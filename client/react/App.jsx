@@ -25,6 +25,7 @@ const App = () => {
       !userLoggedIn
         // Render the login page,
         ? <> 
+            <div id='city-background' />
             <h1 className='app-title' >
               <span className='big-letter'>F</span>INANCE 
               <span className='big-letter'>U</span>SAGE
@@ -34,6 +35,7 @@ const App = () => {
           </>
         // Otherwise render the Dashboard
         : <div className='homepage'>
+            <div id='background'/>
             {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/" element={< />}/> */}
