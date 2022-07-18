@@ -4,22 +4,25 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const NavBar = props => {
-
+  /*
+    Last Link in NavBar is logout button. This is the onClick function for the button.
+    Logout works by setting the cookie to expire on 1970 making the cookie stored during login
+    invalid. Redirects to login page. 
+  */ 
   const logOut = () => {
-    console.log('logging out');
     document.cookie = "SSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload();
   }
-
+  /* 
+    Defining routes for react-router for navBar. Links to different routes where we render components 
+  */
   return (
     <> 
       <div className="nav"> 
         <div><Link className="nav-link" to="/">Dashboard</Link></div>
         <div><Link className="nav-link" to="/income">Income</Link></div>
         <div><Link className="nav-link" to="/expenses">Expenses</Link></div>
-        <div><Link className="nav-link" to="/net">Net</Link></div>
-        <div><Link className="nav-link" to="/assets">Assets</Link></div>
-        <div><Link className="nav-link" to="/investments">Investments</Link></div>
+        <div><Link className="nav-link" to="/assets">Assets/Investments</Link></div>
         <div><Link className="nav-link" to="/" onClick={logOut}>Logout</Link></div>
       </div>
     </>

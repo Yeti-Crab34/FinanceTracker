@@ -3,20 +3,19 @@ import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
 const Incomes = props => {
-    const [incomes, setIncomes] = useState([]); 
+    const {incomes, changeIncomes} = props;
     const [userID, setID] = useState('');
+    const [successfulPost, postSuccess] = useState('')
 
     /* 
         we use this successfulPost as a dependency for useEffect so that it runs everytime 
         a new expense is added so it can rerender with the new expense. This also runs 
         initially to display the expenses the user already had.
     */
-    const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
-        console.log('useEffect of Incomes');
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
-        console.log("id:", id);
+        // Get request for expenses of this account:
         axios.get('http://localhost:3002/info', 
             {
                 params: {
@@ -27,7 +26,6 @@ const Incomes = props => {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
-                console.log(res.data.currIncomes);
                 const incomeArr = [];
                 let id = 0;
                 for(const income of res.data.currIncomes) {
@@ -39,8 +37,7 @@ const Incomes = props => {
                         </div>
                     );
                 }
-                setIncomes(incomeArr); 
-                console.log('Incomes sate', incomes);
+                changeIncomes(incomeArr); 
             }
         }); 
     }, [successfulPost]);
@@ -59,11 +56,8 @@ const Incomes = props => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
-            }).then((res) => {
-                console.log('Successful addIncome');
-                postSuccess(res);
-                console.log(res);
-            }).catch((err) => {console.log(err)});
+            }).then((res) => postSuccess(true)) 
+            .catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new income to database    
         const itemInput = document.getElementById('incomeItem');
@@ -80,13 +74,13 @@ const Incomes = props => {
                 {incomes}
             </div>
             <div className="input-div">
-                <label for="incomeName">Income Name: </label>
+                <label >Income Name: </label>
                 <input type="text" name="incomeName" placeholder="Income item" id="incomeItem" 
                 onChange={e => setItem(e.target.value)}/>
-                <label for="incomeAmount">Amount: </label>
+                <label >Amount: </label>
                 <input type="text" name="incomeAmount" placeholder="Income amount" id="incomeAmt" 
                 onChange={e => setAmt(e.target.value)}/>
-                <label for="reoccurence">Reoccuring? </label>
+                <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>
@@ -100,4 +94,4 @@ const Incomes = props => {
     )
 }
 
-export default Incomes; ;
+export default Incomes; 
