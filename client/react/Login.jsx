@@ -29,7 +29,8 @@ const Login = props => {
     }
   }, [loginSlide]);
 
-  
+
+  /* onClick function for loginbutton. Sends request to backend to verify login */ 
   const loginBtn = async () => {
     console.log('login');
     try {
@@ -53,6 +54,7 @@ const Login = props => {
     }
   };
 
+  /* onClick function for signupbutton. Sends request to backend to create a user */ 
   const signUpBtn = async () => {
     console.log('signup');
     try {
