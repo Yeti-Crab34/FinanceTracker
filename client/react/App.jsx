@@ -12,7 +12,7 @@ const App = () => {
   const [userLoggedIn, changeLoginState] = useState(document.cookie.length > 0);
 
   useEffect(() => {
-    console.log('login: ' + userLoggedIn);
+    changeLoginState(document.cookie.length > 0);
   });
 
 

@@ -19,7 +19,7 @@ const NavBar = props => {
         <div><Link className="nav-link" to="/net">Net</Link></div>
         <div><Link className="nav-link" to="/assets">Assets</Link></div>
         <div><Link className="nav-link" to="/investments">Investments</Link></div>
-        <div><button className="nav-link" onClick={logOut}>Logout</button></div>
+        <div><Link className="nav-link" to="/" onClick={logOut}>Logout</Link></div>
       </div>
     </>
   )
