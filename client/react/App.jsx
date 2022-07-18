@@ -15,6 +15,7 @@ const App = () => {
     console.log('login: ' + userLoggedIn);
   });
 
+
   return (
     <main className='App'>
       {
@@ -30,19 +31,16 @@ const App = () => {
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>
         // Otherwise render the Dashboard
-        : <div className='homepage'>
+        : <div className='dashboard-container'>
             {/*< NavBar />*/}
             < Routes >
+              {/* < Route path="/" element={< />}/> */}
               < Route path="/income" element={< div />}/>
-              < Route path="/expenses" element={< div />}/>
-              < Route path="/assets" element={< div />}/>
-              < Route path="/net" element={< div />}/>
-              < Route path="/investments" element={< div />}/>
-              < Route path="/logout" element={< div />}/>
+              < Route path="/logout" element={< div />}/> 
               < Route path="/" element={< Dashboard />}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
-            
+      
           </div>
       }
     </main>

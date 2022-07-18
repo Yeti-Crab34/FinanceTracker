@@ -23,11 +23,5 @@ userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); ret
     return res.status(200).send(res.locals); 
 });
 
-userRouter.get('/logout', (req, res) => {
-    res.clearCookie('SSID');
-    window.location.reload(); 
-    return res.status(200); 
-})
-
 
 module.exports = userRouter;
