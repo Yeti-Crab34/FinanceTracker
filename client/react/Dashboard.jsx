@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         console.log('mounting');
+        console.log(document.cookie);
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         console.log("id:", id);
         axios.get('http://localhost:3002/info', 

@@ -18,12 +18,13 @@ userController.createUser = async (req, res, next) => {
     const params = [ fullname, hashedPW, email ];
     const sqlQuery = `
       INSERT INTO users (fullname, password, email) 
-      VALUES ($1, $2, $3);`;
+      VALUES ($1, $2, $3) RETURNING *;`;
     
     const createdUser = await User.query(sqlQuery, params);
 
-    res.locals.user_id = createdUser._id;
-
+    console.log(createdUser.rows[0]._id);
+    res.locals.user_id = createdUser.rows[0]._id;
+    console.log('about to go to cookie middleware with', res.locals.user_id);
     next();
   }
    /* 
