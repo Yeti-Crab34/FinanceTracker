@@ -24,7 +24,8 @@ userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); ret
 });
 
 userRouter.post('/addExpense', userController.addExpense, (req, res) => {
-    return res.status(200); 
+    console.log('add expense successful on backend');
+    return res.status(200).send('success'); 
 });
 
 userRouter.post('/addIncome', userController.addIncome, (req, res) => {
