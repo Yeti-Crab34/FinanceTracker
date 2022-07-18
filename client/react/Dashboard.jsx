@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
+import { Chart, Doughnut } from 'react-chartjs-2';
+import 'chart.js/auto'
 
 
 
@@ -12,7 +14,9 @@ class Dashboard extends React.Component {
         this.state = {
             name: '',
             expenses: [],
-            incomes: []
+            incomes: [],
+            totalExpenses: 0,
+            totalIncomes: 0,
         }
 
     }
@@ -54,10 +58,21 @@ class Dashboard extends React.Component {
                         </div>
                     );
                 }
+
+                let totalExpenses = 0;
+                res.data.totalExpenses.forEach(expense => {
+                    totalExpenses += parseInt(expense.value.slice(1).replace(/,/g, ''));
+                });
+                let totalIncomes = 0;
+                res.data.totalIncomes.forEach(income => {
+                    totalIncomes += parseInt(income.value.slice(1).replace(/,/g, '')); 
+                });
                 this.setState({ 
                     name: res.data.currUser,
                     expenses: expenseArr,
                     incomes: incomeArr,
+                    totalExpenses: totalExpenses,
+                    totalIncomes: totalIncomes,
                 })
             }
         }); 
@@ -74,7 +89,33 @@ class Dashboard extends React.Component {
                 < NavBar />
                 
                 <div className="dashboardcontainer">
-                    <div className="Graph">Graph</div>
+                    <div className="Graph">
+                        <div className="chartWrapper">
+                            <Doughnut data = {{
+                            labels: ['Total Income', 'Total Expenses'],
+                            datasets: [{
+                                backgroundColor: ['#00ff0d', '#ff0303'],
+                                hoverBackground: ['#51fc59', '#f54545'],
+                                data: [this.state.totalIncomes, this.state.totalExpenses]
+                            }],  
+                            }}
+                            options={{
+                                title:{
+                                    display: true,
+                                    text: 'Net',
+                                    fontSize: 26,                            
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'left',
+                                },
+                                aspectRatio: 1,
+                                responsive: true,
+                            }}>
+                            </Doughnut>
+                        </div>
+                        
+                    </div>
                     <div className="expenses">{this.state.expenses}</div>
                     <div className="incomes">{this.state.incomes}</div>
                 </div>
