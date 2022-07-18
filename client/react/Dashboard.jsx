@@ -21,6 +21,9 @@ class Dashboard extends React.Component {
 
     }
 
+    /* 
+        After component mounts, we want it to grab user expenses and user incomes from database to display
+    */ 
     componentDidMount() {
         console.log('mounting');
         console.log(document.cookie);
@@ -36,6 +39,7 @@ class Dashboard extends React.Component {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
+                // creating expenses to update expenses state
                 console.log(res.data.currExpenses);
                 const expenseArr = [];
                 for(const expense of res.data.currExpenses) {
@@ -44,10 +48,11 @@ class Dashboard extends React.Component {
                             <span className='expenseName'>{expense.item}: </span>
                             <span className='expenseAmt'>{expense.value}</span>
                             <br />
-                            <span className='recurring'>Occurs {expense.recurring}</span> 
+                            <span className='recurring'>Date: {expense.created.slice(0, 10)}</span> 
                         </div>
                     );
                 }
+                // creating incomes to update incomes state
                 const incomeArr = [];
                 for(const income of res.data.currIncomes) {
                     incomeArr.push(
@@ -55,7 +60,7 @@ class Dashboard extends React.Component {
                             <span className="expenseName">{income.item}: </span>
                             <span className="incomeAmt">{income.value}</span>
                             <br />
-                            <span className="recurring">Occurs {income.recurring}</span>
+                            <span className="recurring">Date: {income.created.slice(0, 10)}</span>
                         </div>
                     );
                 }
@@ -81,21 +86,24 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <>
+            <>  
+                {/* renders the app logo and welcome message above navBar */ }
                 <div className='aboveNav'>
                     <span className="titleName">Finance Tracker</span>
-                    <span className="greeting">Hello { this.state.name }</span>
+                    <span className="greeting">Hello, { this.state.name }</span>
                 </div>
 
+                {/* rendering the navBar */}
                 < NavBar />
                 
                 <div className="dashboardcontainer">
+                    {/* Rendering the graph for the dashboard via chartJS*/}
                     <div className="Graph">
                         <div className="chartWrapper">
                             <Doughnut data = {{
                             labels: ['Total Income', 'Total Expenses'],
                             datasets: [{
-                                backgroundColor: ['#00ff0d', '#ff0303'],
+                                backgroundColor: ['#65E564', '#EE3F53'],
                                 hoverBackground: ['#51fc59', '#f54545'],
                                 data: [this.state.totalIncomes, this.state.totalExpenses]
                             }],  
@@ -117,8 +125,15 @@ class Dashboard extends React.Component {
                         </div>
                         
                     </div>
-                    <div className="expenses">{this.state.expenses}</div>
-                    <div className="incomes">{this.state.incomes}</div>
+                    {/* Rendering the expenses and incomes to display*/}
+                    <div className="expenses">
+                        <div className="title">Expenses</div> 
+                        {this.state.expenses}
+                    </div>
+                    <div className="incomes">
+                        <div className='title'>Incomes</div>
+                        {this.state.incomes}
+                    </div>
                 </div>
             </>
 

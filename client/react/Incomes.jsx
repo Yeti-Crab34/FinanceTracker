@@ -33,9 +33,8 @@ const Incomes = props => {
                 for(const income of res.data.currIncomes) {
                     incomeArr.push(
                         <div id={id++} className='incomeItem'>
-                            <span className='incomeName'>{income.item}: </span>
+                            <span className='incomeName'>{income.item} </span>
                             <span className='incomeAmt'>{income.value}</span>
-                            <br />
                             <span className='recurring'>Occurs {income.recurring}</span> 
                         </div>
                     );
@@ -81,10 +80,13 @@ const Incomes = props => {
                 {incomes}
             </div>
             <div className="input-div">
-                <input type="text" placeholder="Income item" id="incomeItem" 
+                <label for="incomeName">Income Name: </label>
+                <input type="text" name="incomeName" placeholder="Income item" id="incomeItem" 
                 onChange={e => setItem(e.target.value)}/>
-                <input type="text" placeholder="Income amount" id="incomeAmt" 
+                <label for="incomeAmount">Amount: </label>
+                <input type="text" name="incomeAmount" placeholder="Income amount" id="incomeAmt" 
                 onChange={e => setAmt(e.target.value)}/>
+                <label for="reoccurence">Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>

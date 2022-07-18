@@ -33,7 +33,7 @@ const Expenses = props => {
                 for(const expense of res.data.currExpenses) {
                     expenseArr.push(
                         <div id={id++} className='expenseItem'>
-                            <span className='expenseName'>{expense.item}: </span>
+                            <span className='expenseName'>{expense.item} </span>
                             <span className='expenseAmt'>{expense.value}</span>
                             <span className='recurring'>Occurs {expense.recurring}</span> 
                         </div>
@@ -82,10 +82,10 @@ const Expenses = props => {
             </div>
             <div className="input-div">
                 <label for="expenseItem">Expense Name: </label>
-                <input type="text" name="expenseItem" id="expenseItem" 
+                <input type="text" name="expenseItem" id="expenseItem" placeholder="Expense name"
                 onChange={e => setItem(e.target.value)}/>
                 <label for="expenseAmount">Amount: </label>
-                <input type="text" name="expenseAmount" id="expenseAmt" 
+                <input type="text" name="expenseAmount" id="expenseAmt" placeholder="Expense amount"
                 onChange={e => setAmt(e.target.value)}/>
                 <label for="reoccurence">Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>

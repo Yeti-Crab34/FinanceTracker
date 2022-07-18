@@ -262,14 +262,11 @@ body {
 }
 
 .homepage {
-
-// background-color: #c4cfbb54;
 height: auto;
 
 .titleName {
   font-size: 3rem;
   margin: 3px 0px 5px 4px;
-  // background-color: #c4cfbbf6;
   color: #003755;
   font-family: 'Encode Sans';
   padding: 0px 10px;
@@ -319,7 +316,7 @@ height: auto;
     "Graph expenses"
     "Graph incomes";
 
-  max-height: 790px;
+  max-height: 80vh;
 
   
   .Graph {
@@ -330,7 +327,7 @@ height: auto;
     .chartWrapper {
       display: block;
       position: relative;
-      width: 75%;
+      width: 60%;
       margin: 2.5% auto;
       /*canvas {
         margin-left: 50%;
@@ -341,12 +338,16 @@ height: auto;
 
   .expenses { 
     grid-area: expenses;
-    overflow:auto;
+    overflow-y: scroll;
   }
   
   .incomes {
     grid-area: incomes; 
-    overflow:auto;
+    overflow-y: scroll;
+  }
+
+  .expenses::-webkit-scrollbar, .incomes::-webkit-scrollbar {
+    display: none; 
   }
 
   .expenses, .incomes {
@@ -370,7 +371,6 @@ height: auto;
 
 .expenses-page, .income-page{
   display: block;
-  // background-color: $darkBeige;
 
   .history-container {
     height: 80vh;
@@ -380,7 +380,7 @@ height: auto;
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 2px 2px 10px rgb(0, 0, 0);
 
-    .expenseItem {
+    .expenseItem, .incomeItem{
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       
@@ -393,9 +393,15 @@ height: auto;
 
   .input-div {
     background-color: #003755;
-    padding: 5px;
+    padding: 8px;
     display: flex; 
     justify-content: space-around;
+
+    label{
+      color: white;
+      text-align: center;
+      margin: auto;
+    }
     input {
       
     }
@@ -404,4 +410,12 @@ height: auto;
 
     }
   }
+}
+
+.title {
+  padding-left: 1rem;
+  top: 0;
+  position: sticky;
+  background: $darkBeige;
+  padding: 0.5rem;
 }
