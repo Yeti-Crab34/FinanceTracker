@@ -27,9 +27,8 @@ const App = () => {
         ? <> 
             <div id='city-background' />
             <h1 className='app-title' >
-              <span className='big-letter'>F</span>INANCE 
-              <span className='big-letter'>U</span>SAGE
-              <span className='big-letter'>C</span>HARTS
+              <img src='YetiGetiCash.png' />
+              FINANCE USAGE CHARTS KIT
             </h1>
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>

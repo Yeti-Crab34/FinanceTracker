@@ -58,20 +58,19 @@ body {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
-
+  width: 40vw;
   font-family: 'Encode Sans';
-  font-size: 2em;
+  font-size: .7em;
   background: $beige;
   // background: linear-gradient(90deg, rgb(133, 133, 133) 0%, rgba(242,238,227,1) 100%);
-
+  text-align: center;
   color: #514963;
   padding: 2px 10px;
   border-radius: 2px;
   box-shadow: 3px 5px 10px rgb(32, 32, 32);
 
-  .big-letter {
-    margin-left: 10px;
-    font-size: 1.6em;
+  img {
+    width: 40vw;
   }
 }
 
