@@ -70,8 +70,8 @@ class Dashboard extends React.Component {
                 });
                 this.setState({ 
                     name: res.data.currUser,
-                    expenses: expenseArr,
-                    incomes: incomeArr,
+                    expenses: expenseArr.reverse(),
+                    incomes: incomeArr.reverse(),
                     totalExpenses: totalExpenses,
                     totalIncomes: totalIncomes,
                 })
