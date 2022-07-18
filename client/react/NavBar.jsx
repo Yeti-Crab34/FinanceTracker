@@ -6,6 +6,7 @@ import axios from 'axios';
 const NavBar = props => {
 
   const logOut = () => {
+    console.log('logging out');
     document.cookie = "SSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload();
   }
