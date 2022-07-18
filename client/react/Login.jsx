@@ -54,7 +54,11 @@ const Login = props => {
     }
   };
 
-  /* onClick function for signupbutton. Sends request to backend to create a user */ 
+  /* 
+    onClick function for signupbutton. Sends request to backend to create a user,
+    After confirming successful signup, it should redirect to dashboard, but right now
+    it just redirects to logIn page again where user can login. Not sure where the bug is for that.
+  */ 
   const signUpBtn = async () => {
     console.log('signup');
     try {
@@ -80,11 +84,17 @@ const Login = props => {
     // After successful sign up:
   };
 
+  /* 
+    the login and sign up are both part of the same page. Left is sign up, right is login.
+    This renders the inputs and buttons for both login and signup. slideDirection is how the animation 
+    occurs when we switch from the login side to the sign up side and etc.
+  */
   return (
     <div className="loginContent">
       <div id="back"></div> 
       <div id="slideBox">
         <div className="topLayer">
+          {/* left hand side: sign up*/} 
           <div className="left">
             <div className="content">
               <h2>Sign Up</h2>
@@ -102,6 +112,7 @@ const Login = props => {
               </button> */}
             </div>
           </div>
+          {/* right hand side: log in*/} 
           <div className="right">
             <div className="content">
               <h2>Login</h2>

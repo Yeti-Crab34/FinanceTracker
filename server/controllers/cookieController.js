@@ -2,7 +2,7 @@ const cookieController = {};
 
 
 /**
-* setSSIDCookie - store the user id in a cookie
+* setSSIDCookie - store the user id in a cookie for frontend access
 */
 cookieController.setUserSSIDCookie = (req, res, next) => {
   console.log('setting cookie', res.locals.user_id);

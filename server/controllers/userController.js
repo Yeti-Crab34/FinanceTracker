@@ -27,9 +27,6 @@ userController.createUser = async (req, res, next) => {
     console.log('about to go to cookie middleware with', res.locals.user_id);
     next();
   }
-   /* 
-      How do we error handle two different async functions with one catch block?
-    */
   catch (err) {
     next ({
       log: 'Error at middleware userController',
@@ -61,17 +58,18 @@ userController.verifyUser = async (req, res, next) => {
 
     const verifiedUser = await User.query(sqlQuery);
 
-
+    //this occurs if the user is not found in our database -- the rows property on the returned query is an empty array
     if (verifiedUser.rows.length === 0) {
       console.log('Wrong email/password');  
       res.redirect(400, '/');
     }
+    //if the user is found in our database from our query
     else {
-      const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password)
+      const verifyPW = await bcrypt.compare(password, verifiedUser.rows[0].password) //this returns a boolean
       if (verifyPW) {
         res.locals.user_id = verifiedUser.rows[0]._id;
         next();
-      }// TO DO else redirect to sign up page
+      }
       else {
         console.log('Wrong email/password');
         res.redirect(400, '/');
@@ -83,6 +81,8 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+//this gets information about expenses and income from our user by querying the db for our user id, and then using that to get that information
+//and stores it in res.locals.
 userController.getUser = async (req, res, next) => { 
   console.log('in getUser');
   try { 
@@ -114,6 +114,7 @@ userController.getUser = async (req, res, next) => {
   }
 }
 
+//inserts new expenses into the expense db
 userController.addExpense = async(req, res, next) => {
   try {
     const { item, amount, recurrence, id } = req.body;
@@ -130,6 +131,7 @@ userController.addExpense = async(req, res, next) => {
   }
 }
 
+//adds income to the income db
 userController.addIncome = async(req, res, next) => {
   try {
     const { item, amount, recurrence, id } = req.body;

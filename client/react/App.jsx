@@ -13,11 +13,20 @@ const App = () => {
 
   const [userLoggedIn, changeLoginState] = useState(document.cookie.length > 0);
 
+  /* 
+    Sets login state by checking to see if a cookie exists. 
+    Should probably refactor this to check if the specific user ID cookie exists. 
+   */
   useEffect(() => {
     changeLoginState(document.cookie.length > 0);
   });
 
 
+  /* 
+    Renders the login page or the home dashboard 
+    This is a return using a ternary operator to render either the login/signup page or the dashboard
+    based on the userLoggedIn state. 
+  */
   return (
     <main className='App'>
       {

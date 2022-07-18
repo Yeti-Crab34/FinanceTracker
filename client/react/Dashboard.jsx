@@ -22,7 +22,8 @@ class Dashboard extends React.Component {
     }
 
     /* 
-        After component mounts, we want it to grab user expenses and user incomes from database to display
+        After component mounts, we want it to grab user expenses and user incomes from database to display.
+        Does the fetch request by passing in the user ID which is stored in a cookie created when a user logs in. 
     */ 
     componentDidMount() {
         console.log('mounting');
