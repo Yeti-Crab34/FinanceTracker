@@ -4,6 +4,13 @@ import axios from 'axios';
 const Incomes = props => {
     const [incomes, setIncomes] = useState([]); 
     const [userID, setID] = useState('');
+
+    /* 
+        we use this successfulPost as a dependency for useEffect so that it runs everytime 
+        a new expense is added so it can rerender with the new expense. This also runs 
+        initially to display the expenses the user already had.
+    */
+    const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
         console.log('useEffect of Incomes');
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
@@ -21,9 +28,10 @@ const Incomes = props => {
             else {
                 console.log(res.data.currIncomes);
                 const incomeArr = [];
+                let id = 0;
                 for(const income of res.data.currIncomes) {
                     incomeArr.push(
-                        <div className='incomeItem'>
+                        <div id={id++} className='incomeItem'>
                             <span className='incomeName'>{income.item}: </span>
                             <span className='incomeAmt'>{income.value}</span>
                             <br />
@@ -35,20 +43,24 @@ const Incomes = props => {
                 console.log(incomes);
             }
         }); 
-    }, []);
+    }, [successfulPost]);
 
-
+    // declaring input field states for adding an expense
     const [item, setItem] = useState('');
     const [amount, setAmt] = useState('');
     const [recurrence, setRec] = useState('');
     
     const addIncome = async () => {
-      const result = await axios.post('http://localhost:3002/addIncome', 
+        if (item.length === 0) {alert('Please enter a valid item'); return;}
+        if (!/^\d+\.{0,1}\d{0,2}$/.test(amount)) {alert('Please enter a valid amount'); return;}
+        axios.post('http://localhost:3002/addIncome', 
             {
                 item: item,
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
+            }).then((res) => {
+                console.log('Successful addIncome');
             })
       console.log(result);
     }
@@ -69,4 +81,4 @@ const Incomes = props => {
     )
 }
 
-export default Incomes; 
+export default Incomes; ;
