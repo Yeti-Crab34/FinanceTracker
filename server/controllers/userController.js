@@ -21,10 +21,7 @@ userController.createUser = async (req, res, next) => {
       VALUES ($1, $2, $3) RETURNING *;`;
     
     const createdUser = await User.query(sqlQuery, params);
-
-    console.log(createdUser.rows[0]._id);
     res.locals.user_id = createdUser.rows[0]._id;
-    console.log('about to go to cookie middleware with', res.locals.user_id);
     next();
   }
   catch (err) {
@@ -84,7 +81,6 @@ userController.verifyUser = async (req, res, next) => {
 //this gets information about expenses and income from our user by querying the db for our user id, and then using that to get that information
 //and stores it in res.locals.
 userController.getUser = async (req, res, next) => { 
-  console.log('in getUser');
   try { 
     const target_id = req.query.user_id;
     console.log(target_id);

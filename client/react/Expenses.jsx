@@ -13,10 +13,8 @@ const Expenses = props => {
     */
     const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
-        console.log('useEffect of Expenses');
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
-        console.log("id:", id);
         // Get request for expenses of this account:
         axios.get('http://localhost:3002/info', 
             {
@@ -28,7 +26,6 @@ const Expenses = props => {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
-                console.log(res.data.currExpenses);
                 const expenseArr = [];
                 let id = 0;
                 for(const expense of res.data.currExpenses) {
@@ -41,7 +38,6 @@ const Expenses = props => {
                     );
                 }
                 setExpenses(expenseArr); 
-                console.log('Expense state', expenses);
             }
         }); 
     }, [successfulPost]);
@@ -61,11 +57,8 @@ const Expenses = props => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
-            }).then((res) => {
-                console.log('Successful addExpense')
-                postSuccess(res);
-                console.log(res);
-            }).catch((err) => {console.log(err)});
+            }).then((res) =>  postSuccess(res))
+            .catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new expense to database    
         const itemInput = document.getElementById('expenseItem');

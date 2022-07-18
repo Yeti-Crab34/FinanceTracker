@@ -13,10 +13,8 @@ const Incomes = props => {
     */
     const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
-        console.log('useEffect of Incomes');
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
-        console.log("id:", id);
         axios.get('http://localhost:3002/info', 
             {
                 params: {
@@ -27,7 +25,6 @@ const Incomes = props => {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
-                console.log(res.data.currIncomes);
                 const incomeArr = [];
                 let id = 0;
                 for(const income of res.data.currIncomes) {
@@ -40,7 +37,6 @@ const Incomes = props => {
                     );
                 }
                 setIncomes(incomeArr); 
-                console.log('Incomes sate', incomes);
             }
         }); 
     }, [successfulPost]);
@@ -60,9 +56,7 @@ const Incomes = props => {
                 recurrence: recurrence,
                 id: userID,
             }).then((res) => {
-                console.log('Successful addIncome');
                 postSuccess(res);
-                console.log(res);
             }).catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new income to database    

@@ -8,7 +8,6 @@ const cookieController = require('../controllers/cookieController');
 userRouter.post('/signup', 
     userController.createUser, 
     cookieController.setUserSSIDCookie, (req, res) => {
-    console.log('done with middleware chain, about to send response to frontend');
     return res.status(200).send(true).json();
 });
 
@@ -18,13 +17,12 @@ userRouter.post('/login',
         return res.status(200).send(true).json();
 });
 
-userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); return next()}, userController.getUser, (req, res) => {
+userRouter.get('/info', userController.getUser, (req, res) => {
 
     return res.status(200).send(res.locals); 
 });
 
 userRouter.post('/addExpense', userController.addExpense, (req, res) => {
-    console.log('add expense successful on backend');
     return res.status(200).send('success'); 
 });
 

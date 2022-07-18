@@ -32,7 +32,6 @@ const Login = props => {
 
   /* onClick function for loginbutton. Sends request to backend to verify login */ 
   const loginBtn = async () => {
-    console.log('login');
     try {
       const status = await axios.post('http://localhost:3002/login', 
         {email: email, password: password },
@@ -44,7 +43,6 @@ const Login = props => {
           },
         }, 
       );
-      console.log(status);
       // After successful login:
       if (status) props.changeLoginState(true);
       else console.log('Error logging in');
@@ -60,10 +58,8 @@ const Login = props => {
     it just redirects to logIn page again where user can login. Not sure where the bug is for that.
   */ 
   const signUpBtn = async () => {
-    console.log('signup');
     try {
       if (!/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email)) console.log('did not pass regex');
-      console.log('passed email check')
       const status = await axios.post('http://localhost:3002/signup',
         {fullname: fullName, email: email, password: password },
         {

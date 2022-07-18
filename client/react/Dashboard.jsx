@@ -18,18 +18,13 @@ class Dashboard extends React.Component {
             totalExpenses: 0,
             totalIncomes: 0,
         }
-
     }
-
     /* 
         After component mounts, we want it to grab user expenses and user incomes from database to display.
         Does the fetch request by passing in the user ID which is stored in a cookie created when a user logs in. 
     */ 
     componentDidMount() {
-        console.log('mounting');
-        console.log(document.cookie);
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
-        console.log("id:", id);
         axios.get('http://localhost:3002/info', 
             {
                 params: {
@@ -41,7 +36,6 @@ class Dashboard extends React.Component {
             if(err) console.log('err:', err); 
             else {
                 // creating expenses to update expenses state
-                console.log(res.data.currExpenses);
                 const expenseArr = [];
                 for(const expense of res.data.currExpenses) {
                     expenseArr.push(
@@ -65,7 +59,6 @@ class Dashboard extends React.Component {
                         </div>
                     );
                 }
-
                 let totalExpenses = 0;
                 res.data.totalExpenses.forEach(expense => {
                     totalExpenses += parseInt(expense.value.slice(1).replace(/,/g, ''));
@@ -137,7 +130,6 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
             </>
-
         )
     }
 }
