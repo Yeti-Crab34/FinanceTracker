@@ -29,6 +29,7 @@ const Login = props => {
     }
   }, [loginSlide]);
 
+  
   const loginBtn = async () => {
     console.log('login');
     try {
@@ -52,12 +53,12 @@ const Login = props => {
     }
   };
 
-  const signUpBtn = () => {
+  const signUpBtn = async () => {
     console.log('signup');
     try {
-      if (!'[a-z0-9]+@[a-z]+\.[a-z]{2,3}'.test(email)) console.log('did not pass regex');
+      if (!/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email)) console.log('did not pass regex');
       console.log('passed email check')
-      const status = axios.post('http://localhost:3002/signup',
+      const status = await axios.post('http://localhost:3002/signup',
         {fullname: fullName, email: email, password: password },
         {
           headers: {
@@ -66,8 +67,9 @@ const Login = props => {
           },
         }
       );
+      console.log(status);
       // After successful signup:
-      if (status === true) props.changeLoginState(true);
+      if (status) props.changeLoginState(true);
       else console.log('error signing up');
     }
     catch(err) {

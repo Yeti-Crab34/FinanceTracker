@@ -7,8 +7,8 @@ const cookieController = require('../controllers/cookieController');
 userRouter.post('/signup', 
     userController.createUser, 
     cookieController.setUserSSIDCookie, (req, res) => {
-        // TO DO REDIRECT TO DASHBOARD PAGE
-        return res.status(200).send(true).json();
+    console.log('done with middleware chain, about to send response to frontend');
+    return res.status(200).send(true).json();
 });
 
 userRouter.post('/login', 
@@ -23,10 +23,13 @@ userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); ret
     return res.status(200).send(res.locals); 
 });
 
-userRouter.get('/logout', (req, res) => {
-    res.clearCookie('SSID');
-    window.location.reload(); 
-    return res.status(200); 
+userRouter.post('/addExpense', userController.addExpense, (req, res) => {
+    console.log('add expense successful on backend');
+    return res.status(200).send('success'); 
+});
+
+userRouter.post('/addIncome', userController.addIncome, (req, res) => {
+    return res.status(200);
 })
 
 

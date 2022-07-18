@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import Login from './Login.jsx';
 import Dashboard from './Dashboard.jsx';
+import Expenses from './Expenses.jsx';
+import Incomes from './Incomes.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -12,8 +14,9 @@ const App = () => {
   const [userLoggedIn, changeLoginState] = useState(document.cookie.length > 0);
 
   useEffect(() => {
-    console.log('login: ' + userLoggedIn);
+    changeLoginState(document.cookie.length > 0);
   });
+
 
   return (
     <main className='App'>
@@ -22,6 +25,7 @@ const App = () => {
       !userLoggedIn
         // Render the login page,
         ? <> 
+            <div id='city-background' />
             <h1 className='app-title' >
               <span className='big-letter'>F</span>INANCE 
               <span className='big-letter'>U</span>SAGE
@@ -30,17 +34,21 @@ const App = () => {
             < Login userLoggedIn={userLoggedIn} changeLoginState={changeLoginState}/>
           </>
         // Otherwise render the Dashboard
-        : <>
+        : <div className='homepage'>
+            <div id='background'/>
             {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/" element={< />}/> */}
-              < Route path="/content" element={< div />}/>
-              
-              < Route path="/" element={<h1 className='homepage'>Dashboard</h1>}/>
+              < Route path="/expenses" element={ < Expenses /> }/>
+              < Route path="/income" element={< Incomes />}/>
+              < Route path="/assets" element={< div />}/>
+              < Route path="/net" element={< div />}/>
+              < Route path="/investments" element={< div />}/>
+              < Route path="/" element={< Dashboard />}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
-            < Dashboard />
-          </>
+      
+          </div>
       }
     </main>
   )
