@@ -39,7 +39,9 @@ const App = () => {
               {/* < Route path="/" element={< />}/> */}
               < Route path="/expenses" element={ < Expenses /> }/>
               < Route path="/income" element={< Incomes />}/>
-              < Route path="/logout" element={< div />}/> 
+              < Route path="/assets" element={< div />}/>
+              < Route path="/net" element={< div />}/>
+              < Route path="/investments" element={< div />}/>
               < Route path="/" element={< Dashboard />}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
