@@ -17,6 +17,7 @@ const Expenses = props => {
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
         console.log("id:", id);
+        // Get request for expenses of this account:
         axios.get('http://localhost:3002/info', 
             {
                 params: {
