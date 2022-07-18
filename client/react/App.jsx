@@ -5,6 +5,7 @@ import NavBar from './NavBar.jsx';
 import Login from './Login.jsx';
 import Dashboard from './Dashboard.jsx';
 import Expenses from './Expenses.jsx';
+import Incomes from './Incomes.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -36,8 +37,8 @@ const App = () => {
             {/*< NavBar />*/}
             < Routes >
               {/* < Route path="/" element={< />}/> */}
-              < Route path="/expenses" element={ <Expenses /> }/>
-              < Route path="/income" element={< div />}/>
+              < Route path="/expenses" element={ < Expenses /> }/>
+              < Route path="/income" element={< Incomes />}/>
               < Route path="/logout" element={< div />}/> 
               < Route path="/" element={< Dashboard />}/>
               < Route path="*" element={< Error />}/>

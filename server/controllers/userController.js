@@ -109,7 +109,7 @@ userController.getUser = async (req, res, next) => {
 userController.addExpense = async(req, res, next) => {
   try {
     const { item, amount, recurrence, id } = req.body;
-    const params = [item, recurrence, amount, '7/16/2022', id]; 
+    const params = [item, recurrence, amount, new Date(), id]; 
     const sqlQuery = `
       INSERT INTO Expense (item, recurring, value, created, user_id) 
       VALUES ($1, $2, $3, $4, $5);
@@ -119,6 +119,22 @@ userController.addExpense = async(req, res, next) => {
   }
   catch {
     return next('could not add expense')
+  }
+}
+
+userController.addIncome = async(req, res, next) => {
+  try {
+    const { item, amount, recurrence, id } = req.body;
+    const params = [item, recurrence, amount, new Date(), id]; 
+    const sqlQuery = `
+      INSERT INTO Income (item, recurring, value, created, user_id) 
+      VALUES ($1, $2, $3, $4, $5);
+      `;
+    const incQuery = await User.query(sqlQuery, params); 
+    return next();
+  }
+  catch {
+    return next('could not add income')
   }
 }
 

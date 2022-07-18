@@ -25,6 +25,10 @@ userRouter.get('/info', (req, res, next) => {console.log(req.query.user_id); ret
 
 userRouter.post('/addExpense', userController.addExpense, (req, res) => {
     return res.status(200); 
+});
+
+userRouter.post('/addIncome', userController.addIncome, (req, res) => {
+    return res.status(200);
 })
 
 
