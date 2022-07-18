@@ -5,13 +5,13 @@ import axios from 'axios';
 const Expenses = props => {
     const {expenses, changeExpenses} = props;
     const [userID, setID] = useState('');
+    const [successfulPost, postSuccess] = useState('')
     
     /* 
         we use this successfulPost as a dependency for useEffect so that it runs everytime 
         a new expense is added so it can rerender with the new expense. This also runs 
         initially to display the expenses the user already had.
     */
-    const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
@@ -57,7 +57,7 @@ const Expenses = props => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
-            }).then((res) =>  postSuccess(res))
+            }).then((res) =>  postSuccess(true))
             .catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new expense to database    

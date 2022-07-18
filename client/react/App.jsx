@@ -51,7 +51,16 @@ const App = () => {
               {/* < Route path="/" element={< />}/> */}
               < Route path="/expenses" element={ < Expenses expenses={expensesList} changeExpenses={changeExpensesList}/> }/>
               < Route path="/income" element={< Incomes incomes={incomesList} changeIncomes={changeIncomesList}/>}/>
-              < Route path="/assets" element={<div id="assets">Assets: < img src="yeticrab.jpeg"/></div>}/>
+              < Route path="/assets" element={<div id="assets">Assets: < img src="yeticrab.jpeg"/> 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div>Stanley Chen</div>
+                <div>Alex Cusick</div>
+                <div>Roy Jiang</div>
+                <div>David Kagan</div>
+              </div>}/>
               < Route path="/" element={< Dashboard expenses={expenses} changeExpenses={changeExpenses} incomes={incomes} changeIncomes={changeIncomes} name={name} changeName={changeName}/>}/>
               < Route path="*" element={< Error />}/>
             </ Routes >

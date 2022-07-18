@@ -97,7 +97,7 @@ const Login = props => {
               <div className="form-group">
                 <input type="text" placeholder="Full Name" onChange={e => setFullName(e.target.value)}/>
                 <input id="email" type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
-                <input id="password" type="text" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+                <input id="password" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
                 <input type="text" placeholder="Confirm Password" />
               </div>
               <button id="signup" onClick={signUpBtn}>Sign up</button>
@@ -114,7 +114,7 @@ const Login = props => {
               <h2>Login</h2>
               <div className="form-group">
                 <input id="email" type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
-                <input id="password" type="text" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+                <input id="password" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
               </div>
               <button id="login" type="submit" onClick={loginBtn}>Log in</button>
               {/* Button to shift over to sign-up page */}

@@ -5,16 +5,17 @@ import axios from 'axios';
 const Incomes = props => {
     const {incomes, changeIncomes} = props;
     const [userID, setID] = useState('');
+    const [successfulPost, postSuccess] = useState('')
 
     /* 
         we use this successfulPost as a dependency for useEffect so that it runs everytime 
         a new expense is added so it can rerender with the new expense. This also runs 
         initially to display the expenses the user already had.
     */
-    const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
+        // Get request for expenses of this account:
         axios.get('http://localhost:3002/info', 
             {
                 params: {
@@ -55,9 +56,8 @@ const Incomes = props => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
-            }).then((res) => {
-                postSuccess(res);
-            }).catch((err) => {console.log(err)});
+            }).then((res) => postSuccess(true)) 
+            .catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new income to database    
         const itemInput = document.getElementById('incomeItem');
@@ -94,4 +94,4 @@ const Incomes = props => {
     )
 }
 
-export default Incomes; ;
+export default Incomes; 
