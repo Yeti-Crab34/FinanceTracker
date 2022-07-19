@@ -16,6 +16,9 @@ const App = () => {
   const [expensesList, changeExpensesList] = useState([]);
   const [incomesList, changeIncomesList] = useState([]);
 
+
+
+
   /* 
     Sets login state by checking to see if a cookie exists. 
     Should probably refactor this to check if the specific user ID cookie exists. 

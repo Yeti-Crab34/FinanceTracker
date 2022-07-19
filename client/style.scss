@@ -390,7 +390,7 @@ height: auto;
 
     .expenseItem, .incomeItem{
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr auto auto;
       
       span {
         border: 1px solid black;
