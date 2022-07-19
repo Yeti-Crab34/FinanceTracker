@@ -2,4 +2,4 @@
 Finance tracker
 
 
-![](./main/client/yeticrab.jpeg)
+![](./client/yeticrab.jpeg)
