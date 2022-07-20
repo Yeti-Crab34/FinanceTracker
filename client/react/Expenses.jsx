@@ -3,20 +3,23 @@ import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
 const Expenses = props => {
-    const [expenses, setExpenses] = useState([]); 
+    const {expenses, changeExpenses} = props;
     const [userID, setID] = useState('');
+    const [successfulPost, postSuccess] = useState('')
+
+    const deletePost = () => {
+
+    }
     
     /* 
         we use this successfulPost as a dependency for useEffect so that it runs everytime 
         a new expense is added so it can rerender with the new expense. This also runs 
         initially to display the expenses the user already had.
     */
-    const [successfulPost, postSuccess] = useState('')
     useEffect(() => {
-        console.log('useEffect of Expenses');
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
         setID(id);
-        console.log("id:", id);
+        // Get request for expenses of this account:
         axios.get('http://localhost:3002/info', 
             {
                 params: {
@@ -27,20 +30,19 @@ const Expenses = props => {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
-                console.log(res.data.currExpenses);
                 const expenseArr = [];
-                let id = 0;
                 for(const expense of res.data.currExpenses) {
                     expenseArr.push(
-                        <div id={id++} className='expenseItem'>
+                        <div className='expenseItem'>
                             <span className='expenseName'>{expense.item} </span>
                             <span className='expenseAmt'>{expense.value}</span>
                             <span className='recurring'>Occurs {expense.recurring}</span> 
+                            <span><button id={expense._id} className='editButton' onClick={editPost}>Edit</button></span>
+                            <span><button id={expense._id} className='deleteButton' onClick={deletePost}>Delete</button></span>
                         </div>
                     );
                 }
-                setExpenses(expenseArr); 
-                console.log('Expense state', expenses);
+                changeExpenses(expenseArr); 
             }
         }); 
     }, [successfulPost]);
@@ -60,11 +62,8 @@ const Expenses = props => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
-            }).then((res) => {
-                console.log('Successful addExpense')
-                postSuccess(res);
-                console.log(res);
-            }).catch((err) => {console.log(err)});
+            }).then((res) =>  postSuccess(true))
+            .catch((err) => {console.log(err)});
 
         // clearing the input fields after successfully posting new expense to database    
         const itemInput = document.getElementById('expenseItem');
@@ -81,13 +80,13 @@ const Expenses = props => {
                 {expenses}  
             </div>
             <div className="input-div">
-                <label for="expenseItem">Expense Name: </label>
+                <label >Expense Name: </label>
                 <input type="text" name="expenseItem" id="expenseItem" placeholder="Expense name"
                 onChange={e => setItem(e.target.value)}/>
-                <label for="expenseAmount">Amount: </label>
+                <label >Amount: </label>
                 <input type="text" name="expenseAmount" id="expenseAmt" placeholder="Expense amount"
                 onChange={e => setAmt(e.target.value)}/>
-                <label for="reoccurence">Reoccuring? </label>
+                <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>

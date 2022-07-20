@@ -29,9 +29,9 @@ const Login = props => {
     }
   }, [loginSlide]);
 
-  
+
+  /* onClick function for loginbutton. Sends request to backend to verify login */ 
   const loginBtn = async () => {
-    console.log('login');
     try {
       const status = await axios.post('http://localhost:3002/login', 
         {email: email, password: password },
@@ -43,7 +43,6 @@ const Login = props => {
           },
         }, 
       );
-      console.log(status);
       // After successful login:
       if (status) props.changeLoginState(true);
       else console.log('Error logging in');
@@ -53,11 +52,14 @@ const Login = props => {
     }
   };
 
+  /* 
+    onClick function for signupbutton. Sends request to backend to create a user,
+    After confirming successful signup, it should redirect to dashboard, but right now
+    it just redirects to logIn page again where user can login. Not sure where the bug is for that.
+  */ 
   const signUpBtn = async () => {
-    console.log('signup');
     try {
       if (!/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email)) console.log('did not pass regex');
-      console.log('passed email check')
       const status = await axios.post('http://localhost:3002/signup',
         {fullname: fullName, email: email, password: password },
         {
@@ -78,18 +80,24 @@ const Login = props => {
     // After successful sign up:
   };
 
+  /* 
+    the login and sign up are both part of the same page. Left is sign up, right is login.
+    This renders the inputs and buttons for both login and signup. slideDirection is how the animation 
+    occurs when we switch from the login side to the sign up side and etc.
+  */
   return (
     <div className="loginContent">
       <div id="back"></div> 
       <div id="slideBox">
         <div className="topLayer">
+          {/* left hand side: sign up*/} 
           <div className="left">
             <div className="content">
               <h2>Sign Up</h2>
               <div className="form-group">
                 <input type="text" placeholder="Full Name" onChange={e => setFullName(e.target.value)}/>
                 <input id="email" type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
-                <input id="password" type="text" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+                <input id="password" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
                 <input type="text" placeholder="Confirm Password" />
               </div>
               <button id="signup" onClick={signUpBtn}>Sign up</button>
@@ -100,12 +108,13 @@ const Login = props => {
               </button> */}
             </div>
           </div>
+          {/* right hand side: log in*/} 
           <div className="right">
             <div className="content">
               <h2>Login</h2>
               <div className="form-group">
                 <input id="email" type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
-                <input id="password" type="text" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+                <input id="password" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
               </div>
               <button id="login" type="submit" onClick={loginBtn}>Log in</button>
               {/* Button to shift over to sign-up page */}
