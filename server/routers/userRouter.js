@@ -27,8 +27,8 @@ userRouter.post('/addExpense', income_expenseController.addExpense, (req, res) =
     return res.status(200).send('success'); 
 });
 
-userRouter.post('/addIncome', income_expenseController.addIncome, (req, res) => {
-    return res.status(200);
+userRouter.post('/addIncome', userController.addIncome, (req, res) => {
+    return res.status(200).send('success');
 })
 
 userRouter.patch('/updateIncome', income_expenseController.updateIncome, (req, res) => {

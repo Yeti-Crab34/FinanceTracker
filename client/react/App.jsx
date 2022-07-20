@@ -16,6 +16,9 @@ const App = () => {
   const [expensesList, changeExpensesList] = useState([]);
   const [incomesList, changeIncomesList] = useState([]);
 
+
+
+
   /* 
     Sets login state by checking to see if a cookie exists. 
     Should probably refactor this to check if the specific user ID cookie exists. 
@@ -50,7 +53,7 @@ const App = () => {
             < Routes >
               {/* < Route path="/" element={< />}/> */}
               < Route path="/expenses" element={ < Expenses expenses={expensesList} changeExpenses={changeExpensesList}/> }/>
-              < Route path="/income" element={< Incomes incomes={incomesList} changeIncomes={changeIncomesList}/>}/>
+              < Route path="/income" element={< Incomes incomesList={incomesList} changeIncomesList={changeIncomesList}/>}/>
               < Route path="/assets" element={<div id="assets">Assets: < img src="yeticrab.jpeg"/> 
                 <br/>
                 <br/>

@@ -6,6 +6,10 @@ const Expenses = props => {
     const {expenses, changeExpenses} = props;
     const [userID, setID] = useState('');
     const [successfulPost, postSuccess] = useState('')
+
+    const deletePost = () => {
+
+    }
     
     /* 
         we use this successfulPost as a dependency for useEffect so that it runs everytime 
@@ -27,13 +31,14 @@ const Expenses = props => {
             if(err) console.log('err:', err); 
             else {
                 const expenseArr = [];
-                let id = 0;
                 for(const expense of res.data.currExpenses) {
                     expenseArr.push(
-                        <div id={id++} className='expenseItem'>
+                        <div className='expenseItem'>
                             <span className='expenseName'>{expense.item} </span>
                             <span className='expenseAmt'>{expense.value}</span>
                             <span className='recurring'>Occurs {expense.recurring}</span> 
+                            <span><button id={expense._id} className='editButton' onClick={editPost}>Edit</button></span>
+                            <span><button id={expense._id} className='deleteButton' onClick={deletePost}>Delete</button></span>
                         </div>
                     );
                 }
