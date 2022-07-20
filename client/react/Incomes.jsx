@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const Incomes = (props) => {
   const { incomesList, changeIncomesList } = props;
+  console.log('Props: ', props)
+
   const [userID, setID] = useState('');
   const [successfulPost, postSuccess] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -142,6 +144,7 @@ const Incomes = (props) => {
 
   //   CREATING THE NEW DIV - THIS PART CAN BE PUT INTO A SEPARATE COMPONENT!!!
   const incomeArr = [];
+  // console.log('IncomesList: ', incomesList)
   for (const income of incomesList) {
     // console.log('Income: ', income);
     if (income._id !== parseInt(editId)) {

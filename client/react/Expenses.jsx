@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
 
-const Expenses = props => {
-    const {expenses, changeExpenses} = props;
+const Expenses = (props) => {
+    const {expensesList, changeExpensesList} = props;
+    console.log('Props: ', props)
     const [userID, setID] = useState('');
     const [successfulPost, postSuccess] = useState('')
     const [deleted, setDeleted] = useState(false);
@@ -91,7 +92,7 @@ const Expenses = props => {
       .then((res, err) => {
         if (err) console.log('err:', err);
         else {
-          changeExpenses(res.data.currExpenses);
+          changeExpensesList(res.data.currExpenses);
         }
       });
   }, [successfulPost, deleted, edited]);
@@ -129,7 +130,8 @@ const Expenses = props => {
     }
       //   CREATING THE NEW DIV - THIS PART CAN BE PUT INTO A SEPARATE COMPONENT!!!
   const expenseArr = [];
-  for (const expense of expenses) {
+//   console.log('Expenses: ', expenses);
+  for (const expense of expensesList) {
     if (expense._id !== parseInt(editId)) {
       expenseArr.push(
         <div className="expenseItem">
@@ -210,9 +212,7 @@ const Expenses = props => {
     return (
         <div className='expenses-page'>
             < NavBar />
-            <div className='history-container'>
-                {expenses}  
-            </div>
+            <div className='history-container'>{expenseArr}</div>
             <div className="input-div">
                 <label >Expense Name: </label>
                 <input type="text" name="expenseItem" id="expenseItem" placeholder="Expense name"
