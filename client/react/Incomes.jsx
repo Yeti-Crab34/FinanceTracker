@@ -7,6 +7,7 @@ const Incomes = (props) => {
   const [userID, setID] = useState('');
   const [successfulPost, postSuccess] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [edited, setEdited] = useState(false);
   const [editId, setEditId] = useState('');
 
   //NEW UD OPERATIONS
@@ -21,7 +22,7 @@ const Incomes = (props) => {
     try {
       const fetchData = async () => {
         const axiosDelete = await axios.delete(
-          `http://localhost:3002/income/delete/${e.target.id}`
+          `http://localhost:3002/removeIncome/${e.target.id}`
         );
       };
       const fetched = fetchData();
@@ -49,23 +50,25 @@ const Incomes = (props) => {
       ? e.target[2].value
       : e.target[2].defaultValue;
 
-    console.log('incomeName', 'incomeAmt', 'recurring');
-    console.log(
-      incomeName,
-      Number(incomeAmt.replace(/[^0-9.-]+/g, '')),
-      recurring
-    );
+    console.log(parseInt(e.target.id));
 
     try {
-      axios.patch(`http://localhost:3002/income/update/${e.target.id}`, {
-        item: incomeName,
-        value: Number(incomeAmt.replace(/[^0-9.-]+/g, '')),
-        recurring: recurring,
-      });
+      axios.patch(
+        `http://localhost:3002/updateIncome/${parseInt(e.target.id)}`,
+        {
+          item: incomeName,
+          value: Number(incomeAmt.replace(/[^0-9.-]+/g, '')),
+          recurring: recurring,
+        }
+      );
     } catch (error) {
       console.log('Edit Error');
     }
+
+    setEdited(!edited);
+    cancelEdit();
   };
+
   const cancelEdit = (e) => {
     try {
       setEditId('');
@@ -84,6 +87,7 @@ const Incomes = (props) => {
     const id = document.cookie.slice(document.cookie.indexOf('=') + 1);
     // postSuccess(false);
     setID(id);
+
     // Get request for expenses of this account:
     //Only make this request IF we are not in edit
     //if (!editMode) then do get request
@@ -99,7 +103,7 @@ const Incomes = (props) => {
           changeIncomesList(res.data.currIncomes);
         }
       });
-  }, [successfulPost, deleted]);
+  }, [successfulPost, deleted, edited]);
   //---------------------------------------------------
 
   // declaring input field states for adding an expense
@@ -171,7 +175,7 @@ const Incomes = (props) => {
     } else {
       console.log('editing');
       incomeArr.push(
-        <form onSubmit={submitEdit}>
+        <form id={income._id} onSubmit={submitEdit}>
           <div className="incomeItem">
             <input
               className="incomeName"
