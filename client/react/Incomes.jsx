@@ -33,9 +33,35 @@ const Incomes = (props) => {
 
   //SUBMIT EDIT CHANGES
   const submitEdit = (e) => {
+    e.preventDefault();
     const id = document.cookie.slice(document.cookie.indexOf('=') + 1);
+    //grab the new values
+    console.log('e: ', e);
+
+    const incomeName = e.target[0].value
+      ? e.target[0].value
+      : e.target[0].defaultValue;
+    const incomeAmt =
+      e.target[1].value || isNaN(e.target[1].value)
+        ? e.target[1].value
+        : e.target[1].defaultValue;
+    const recurring = e.target[2].value
+      ? e.target[2].value
+      : e.target[2].defaultValue;
+
+    console.log('incomeName', 'incomeAmt', 'recurring');
+    console.log(
+      incomeName,
+      Number(incomeAmt.replace(/[^0-9.-]+/g, '')),
+      recurring
+    );
+
     try {
-      axios.patch(`http://localhost:3002/income/update/${e.target.id}`, {});
+      axios.patch(`http://localhost:3002/income/update/${e.target.id}`, {
+        item: incomeName,
+        value: Number(incomeAmt.replace(/[^0-9.-]+/g, '')),
+        recurring: recurring,
+      });
     } catch (error) {
       console.log('Edit Error');
     }
@@ -145,37 +171,47 @@ const Incomes = (props) => {
     } else {
       console.log('editing');
       incomeArr.push(
-        <div className="incomeItem">
-          <input
-            className="incomeName"
-            placeholder={income.item}
-            defaultValue={income.item}
-          />
-          <input
-            className="incomeAmt"
-            placeholder={income.value}
-            defaultValue={income.value}
-          />
-          <input
-            className="recurring"
-            placeholder={`Occurs ${income.recurring}`}
-            defaultValue={`Occurs ${income.recurring}`}
-          />
-          <span>
-            <button id={income._id} className="editButton" onClick={submitEdit}>
-              Confirm
-            </button>
-          </span>
-          <span>
-            <button
-              id={income._id}
-              className="deleteButton"
-              onClick={cancelEdit}
+        <form onSubmit={submitEdit}>
+          <div className="incomeItem">
+            <input
+              className="incomeName"
+              placeholder={income.item}
+              defaultValue={income.item}
+            />
+            <input
+              className="incomeAmt"
+              placeholder={income.value}
+              defaultValue={Number(income.value.replace(/[^0-9.-]+/g, ''))}
+            />
+            <select
+              name="reoccurence"
+              id="expenseRec"
+              defaultValue="Once"
+              onChange={(e) => setRec(e.target.value)}
             >
-              Cancel
-            </button>
-          </span>
-        </div>
+              <option value="Once">Once</option>
+              <option value="Daily">Daily</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Annually">Annually</option>
+            </select>
+            <span>
+              <button id={income._id} type="submit" className="editButton">
+                Confirm
+              </button>
+            </span>
+
+            <span>
+              <button
+                id={income._id}
+                className="cancelButton"
+                onClick={cancelEdit}
+              >
+                Cancel
+              </button>
+            </span>
+          </div>
+        </form>
       );
     }
   }
@@ -206,6 +242,7 @@ const Incomes = (props) => {
         <select
           name="reoccurence"
           id="expenseRec"
+          defaultValue="Once"
           onChange={(e) => setRec(e.target.value)}
         >
           <option value="Once">Once</option>
