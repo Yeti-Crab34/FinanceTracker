@@ -27,7 +27,7 @@ userRouter.post('/addExpense', userController.addExpense, (req, res) => {
 });
 
 userRouter.post('/addIncome', userController.addIncome, (req, res) => {
-    return res.status(200);
+    return res.status(200).send('success');
 })
 
 
