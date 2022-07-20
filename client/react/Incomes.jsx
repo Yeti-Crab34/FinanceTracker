@@ -7,7 +7,7 @@ const Incomes = props => {
     const [userID, setID] = useState('');
     const [successfulPost, postSuccess] = useState('');
     const [editMode, setEditMode] = useState(false);
-    const [editID, setEditID] = useState('');
+    const [editArray, setEditArray] = useState([]);
 
     //NEW UD OPERATIONS
     const test = () => {
@@ -15,11 +15,30 @@ const Incomes = props => {
     }
 
     const toggleEdit = async (e) => {
-        setEditMode = true;
-        setEditID(e.target.id);
+        // setEditMode(true);
+        // setEditID(e.target.id);
         // console.log('Income ID is: ', income._id)
         // console.log('Edit mode: ', editMode);
-        console.log('Edit ID is: ', editID);
+        // console.log('Edit ID is: ', editID);
+
+        const editField = [];
+        const editId = e.target.id;
+        console.log(incomes)
+        
+        for (let income of incomes) {
+            if (income._id === editId){
+        editField.push(
+            <div className='incomeItem'>
+            <input className='incomeName'>{income.item} </input>
+            <input className='incomeAmt'>{income.value}</input>
+            <input className='recurring'>Occurs {income.recurring}</input> 
+            <span><button id={income._id} className='editButton' >Confirm</button></span>
+            <span><button id={income._id} className='deleteButton' >Cancel</button></span>
+        </div>
+        )
+            }
+        }
+        setEditArray(editField);
     }
 
     const deletePost = (e) => {
@@ -86,7 +105,6 @@ const Incomes = props => {
                 const incomeArr = [];
                 for(const income of res.data.currIncomes) {
                     console.log('income being pushed to incomeArray', income)
-                    if (income._id !== editID) {
                     incomeArr.push(
                         <div className='incomeItem'>
                             <span className='incomeName'>{income.item} </span>
@@ -96,25 +114,13 @@ const Incomes = props => {
                             <span><button id={income._id} className='deleteButton' onClick={deletePost}>Delete</button></span>
                         </div>
                     );
-                    } else {
-                        console.log('hi');
-                    incomeArr.push(
-                        <div className='incomeItem'>
-                        <input className='incomeName'>{income.item} </input>
-                        <input className='incomeAmt'>{income.value}</input>
-                        <input className='recurring'>Occurs {income.recurring}</input> 
-                        <span><button id={income._id} className='editButton' onClick={toggleEdit}>Confirm</button></span>
-                        <span><button id={income._id} className='deleteButton' onClick={deletePost}>Cancel</button></span>
-                    </div>
-                    )
-                    }
                 }
                 changeIncomes(incomeArr); 
             }
         }); 
 
 
-    }, [successfulPost, editID]);
+    }, [successfulPost, editArray]);
 
     // declaring input field states for adding an expense
     const [item, setItem] = useState('');
@@ -146,6 +152,7 @@ const Incomes = props => {
             < NavBar />
              <div className='history-container'>
                 {incomes}
+                {editArray}
             </div>
             <div className="input-div">
                 <label >Income Name: </label>
