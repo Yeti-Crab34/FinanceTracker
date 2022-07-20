@@ -3,6 +3,7 @@ const userRouter = express.Router();
 
 const userController = require('../controllers/userController');
 const cookieController = require('../controllers/cookieController');
+const income_expenseController = require('../controllers/income_expenseController')
 
 
 userRouter.post('/signup', 
@@ -17,12 +18,12 @@ userRouter.post('/login',
         return res.status(200).send(true).json();
 });
 
-userRouter.get('/info', userController.getUser, (req, res) => {
+userRouter.get('/info', income_expenseController.getUser, (req, res) => {
 
     return res.status(200).send(res.locals); 
 });
 
-userRouter.post('/addExpense', userController.addExpense, (req, res) => {
+userRouter.post('/addExpense', income_expenseController.addExpense, (req, res) => {
     return res.status(200).send('success'); 
 });
 
@@ -30,5 +31,20 @@ userRouter.post('/addIncome', userController.addIncome, (req, res) => {
     return res.status(200).send('success');
 })
 
+userRouter.patch('/updateIncome', income_expenseController.updateIncome, (req, res) => {
+    return res.status(200).send('success')
+})
+
+userRouter.patch('/updateExpense', income_expenseController.updateExpense, (req, res) => {
+    return res.status(200).send('success')
+})
+
+userRouter.delete('/removeIncome', income_expenseController.removeIncome, (req, res) => {
+    return res.status(200).send('success')
+})
+
+userRouter.delete('/removeExpense', income_expenseController.removeExpense, (req, res) => {
+    return res.status(200).send('success')
+})
 
 module.exports = userRouter;
