@@ -127,6 +127,35 @@ userController.addExpense = async(req, res, next) => {
   }
 }
 
+// adding functionality to update an expense
+userController.updateExpense = async (req, res, next) => {
+  try {
+    const { item, amount, recurrence, id } = req.body;
+    const params = [item, recurrence, amount, new Date(), id]; 
+    const sqlQuery = `
+      UPDATE Expense SET amount = amount, recurrence = recurrence, id = id WHERE item = item;
+      `;
+    const expQuery = await User.query(sqlQuery, params); 
+    return next();
+  }
+  catch {
+    return next('could not update expense')
+  }
+}
+
+// adding functionality to remove expense
+userController.removeExpense = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    // line below is probably incorrect
+    const sqlQuery = `DELETE FROM Expense WHERE {id}=item;`;
+    const remExpQuery = await User.query(sqlQuery)
+    return next();
+  } catch {
+    return next('could not remove expense')
+  }
+}
+
 //adds income to the income db
 userController.addIncome = async(req, res, next) => {
   try {
@@ -141,6 +170,35 @@ userController.addIncome = async(req, res, next) => {
   }
   catch {
     return next('could not add income')
+  }
+}
+
+// adding functionality to update an income
+userController.updateIncome = async (req, res, next) => {
+  try {
+    const { item, amount, recurrence, id } = req.body;
+    const params = [item, recurrence, amount, new Date(), id]; 
+    const sqlQuery = `
+      UPDATE Income SET amount = amount, recurrence = recurrence, id = id WHERE item = item;
+      `;
+    const expQuery = await User.query(sqlQuery, params); 
+    return next();
+  }
+  catch {
+    return next('could not update income')
+  }
+}
+
+// adding functionality to remove income
+userController.removeIncome = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+        // line below is probably incorrect
+    const sqlQuery = `DELETE FROM Income WHERE {id}=item;`;
+    const remIncQuery = await User.query(sqlQuery)
+    return next();
+  } catch {
+    return next('Error: Was not able to remove income')
   }
 }
 
