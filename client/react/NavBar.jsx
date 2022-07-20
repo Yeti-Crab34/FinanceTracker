@@ -18,10 +18,11 @@ const NavBar = props => {
   */
   return (
     <> 
-      <div className="nav"> 
-        <div><Link className="nav-link" to="/">Dashboard</Link></div>
+      <div className="nav" data-testid='2'> 
+        <p data-testid='3'>Hello!</p>
+        <div data-testid='4'><Link className="nav-link" to="/">Dashboard</Link></div>
         <div><Link className="nav-link" to="/income">Income</Link></div>
-        <div><Link className="nav-link" to="/expenses">Expenses</Link></div>
+        <div><Link className="nav-link" to="/expenses" data-testid='1'>Expenses</Link></div>
         <div><Link className="nav-link" to="/assets">Assets/Investments</Link></div>
         <div><Link className="nav-link" to="/" onClick={logOut}>Logout</Link></div>
       </div>
