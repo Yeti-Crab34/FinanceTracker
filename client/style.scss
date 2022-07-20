@@ -414,7 +414,7 @@ body {
     .expenseItem,
     .incomeItem {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 80px 80px;
+      grid-template-columns: 1fr 1fr 1fr 1fr 80px 80px;
 
       span {
         border: 1px solid black;
