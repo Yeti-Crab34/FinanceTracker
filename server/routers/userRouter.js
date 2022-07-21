@@ -23,7 +23,15 @@ userRouter.post(
   }
 );
 
-userRouter.get('/info', income_expenseController.getUser, (req, res) => {
+userRouter.get('/infoUser', income_expenseController.getUser, (req, res) => {
+  return res.status(200).send(res.locals);
+});
+
+userRouter.get('/infoIncome', income_expenseController.getIncome, (req, res) => {
+  return res.status(200).send(res.locals);
+});
+
+userRouter.get('/infoExpenses', income_expenseController.getExpenses, (req, res) => {
   return res.status(200).send(res.locals);
 });
 

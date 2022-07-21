@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 const Incomes = (props) => {
   const { incomesList, changeIncomesList } = props;
-  console.log('Props: ', props)
+  // console.log('Props: ', props)
 
   const [userID, setID] = useState('');
   const [successfulPost, postSuccess] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [edited, setEdited] = useState(false);
   const [editId, setEditId] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
 
   const toggleEdit = async (e) => {
     setEditId(e.target.id);
@@ -54,6 +56,8 @@ const Incomes = (props) => {
     // console.log(parseInt(e.target.id));
 
     try {
+      if (incomeName.length === 0) {alert('Please enter a valid item'); return;}
+      if (!/^\d+\.{0,1}\d{0,2}$/.test(incomeAmt)) {alert('Please enter a valid amount'); return;}
       axios.patch(
         `http://localhost:3002/updateIncome/${parseInt(e.target.id)}`,
         {
@@ -92,7 +96,7 @@ const Incomes = (props) => {
     //Only make this request IF we are not in edit
     //if (!editMode) then do get request
     axios
-      .get('http://localhost:3002/info', {
+      .get('http://localhost:3002/infoIncome', {
         params: {
           user_id: id,
         },
@@ -109,7 +113,7 @@ const Incomes = (props) => {
   // declaring input field states for adding an expense
   const [item, setItem] = useState('');
   const [amount, setAmt] = useState('');
-  const [recurrence, setRec] = useState('');
+  const [recurrence, setRec] = useState('Once');
 
   const addIncome = () => {
     if (item.length === 0) {
@@ -126,6 +130,7 @@ const Incomes = (props) => {
         amount: amount,
         recurrence: recurrence,
         id: userID,
+        created: startDate
       })
       .then((res) => {
         console.log('Post Success true!');
@@ -192,7 +197,6 @@ const Incomes = (props) => {
             <select
               name="reoccurence"
               id="expenseRec"
-              defaultValue="Once"
               onChange={(e) => setRec(e.target.value)}
             >
               <option value="Once">Once</option>
@@ -224,6 +228,7 @@ const Incomes = (props) => {
     }
   }
 
+
   // renders all the income a user has and the input fields for adding a new income
   return (
     <div className="income-page">
@@ -246,18 +251,20 @@ const Incomes = (props) => {
           id="incomeAmt"
           onChange={(e) => setAmt(e.target.value)}
         />
+        <label>Date: </label>
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
         <label>Reoccuring? </label>
         <select
           name="reoccurence"
           id="expenseRec"
-          defaultValue="Once"
-          onChange={(e) => setRec(e.target.value)}
-        >
+          defaultValue="-"
+          onChange={(e) => setRec(e.target.value)}>
           <option value="Once">Once</option>
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
           <option value="Monthly">Monthly</option>
           <option value="Annually">Annually</option>
+
         </select>
         <button onClick={addIncome}>Add Income</button>
       </div>

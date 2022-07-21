@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 const Expenses = (props) => {
     const {expensesList, changeExpensesList} = props;
-    console.log('Props: ', props)
     const [userID, setID] = useState('');
     const [successfulPost, postSuccess] = useState('')
     const [deleted, setDeleted] = useState(false);
     const [edited, setEdited] = useState(false);
     const [editId, setEditId] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
   
     const toggleEdit = async (e) => {
         setEditId(e.target.id);
@@ -47,6 +48,9 @@ const Expenses = (props) => {
           : e.target[2].defaultValue;
     
         try {
+          if (expenseName.length === 0) {alert('Please enter a valid item'); return;}
+          if (!/^\d+\.{0,1}\d{0,2}$/.test(expenseAmt)) {alert('Please enter a valid amount'); return;}
+          if (recurring === '') {alert('Please enter how often this occurs'); return;}
           axios.patch(
             `http://localhost:3002/updateExpense/${parseInt(e.target.id)}`,
             {
@@ -54,12 +58,15 @@ const Expenses = (props) => {
               value: Number(expenseAmt.replace(/[^0-9.-]+/g, '')),
               recurring: recurring,
             }
-          );
+          )
+          .then((res,err)=> {        
+            setEdited(!edited);
+          });
         } catch (error) {
           console.log('Edit Error');
         }
     
-        setEdited(!edited);
+
         cancelEdit();
       };
     
@@ -84,7 +91,7 @@ const Expenses = (props) => {
     //Only make this request IF we are not in edit
     //if (!editMode) then do get request
     axios
-      .get('http://localhost:3002/info', {
+      .get('http://localhost:3002/infoExpenses', {
         params: {
           user_id: id,
         },
@@ -101,7 +108,7 @@ const Expenses = (props) => {
     // declaring input field states for adding an expense
     const [item, setItem] = useState('');
     const [amount, setAmt] = useState('');
-    const [recurrence, setRec] = useState('');
+    const [recurrence, setRec] = useState('Once');
 
     const addExpense = () => {
         if (item.length === 0) {alert('Please enter a valid item'); return;}
@@ -113,6 +120,7 @@ const Expenses = (props) => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
+                created: startDate
             })
             .then((res) => {
                 console.log('Post Success true!');
@@ -177,7 +185,6 @@ const Expenses = (props) => {
             <select
               name="reoccurence"
               id="expenseRec"
-              defaultValue="Once"
               onChange={(e) => setRec(e.target.value)}
             >
               <option value="Once">Once</option>
@@ -220,6 +227,8 @@ const Expenses = (props) => {
                 <label >Amount: </label>
                 <input type="text" name="expenseAmount" id="expenseAmt" placeholder="Expense amount"
                 onChange={e => setAmt(e.target.value)}/>
+                <label>Date: </label>
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
                 <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
                     <option value='Once'>Once</option>
