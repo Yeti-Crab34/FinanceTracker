@@ -7,6 +7,8 @@ const cors = require('cors');
 const path = require('path');
 const PORT = 3002;
 
+// app.use(cors());
+
 //require parsers
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -18,18 +20,19 @@ const userRouter = require('./routers/userRouter');
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client')));
 
-app.use(cors());
+
 
 //to avoid axios CORS errors IN development
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   res.header('Access-Control-Allow-Credentials', 'true');
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 //route handlers
 app.use('/', userRouter);

@@ -3,7 +3,7 @@ import { Line, Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 
-const LineComponent = ({ incomesList, expensesList }) => {
+const ProjectedLineComponent = ({ incomesList, expensesList }) => {
   const [range, setRange] = useState('');
 
 
@@ -35,14 +35,12 @@ const LineComponent = ({ incomesList, expensesList }) => {
   const datesIncomes = new Set();
   const valuesIncomes = [];
   incomesList.forEach((n) => {
-    if (n.created <= new Date()) {
     if (datesIncomes.has(n.created.slice(startSlice, endSlice))) {
       valuesIncomes[valuesIncomes.length - 1] += Number(n.value.replace(/[^0-9.-]+/g, ''));
     } else {
       valuesIncomes.push(Number(n.value.replace(/[^0-9.-]+/g, '')));
     }
     datesIncomes.add(n.created.slice(startSlice, endSlice));
-  }
   })
 
   const datesExpenses = new Set();
@@ -100,4 +98,4 @@ const LineComponent = ({ incomesList, expensesList }) => {
   )
 }
 
-export default LineComponent;
+export default ProjectedLineComponent;

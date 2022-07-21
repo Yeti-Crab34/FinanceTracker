@@ -3,6 +3,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bungee+Outline:regular);
 @import url(https://fonts.googleapis.com/css?family=Bebas+Neue:regular);
 @import url(https://fonts.googleapis.com/css?family=Encode+Sans:400,500,600,700,800,900);
+@import "react-datepicker/dist/react-datepicker.css";
 
 $beige: #e0dcd1;
 $lightBeige: #f2eee3;
@@ -466,10 +467,8 @@ body {
       text-align: center;
       margin: auto;
     }
-    input {
-    }
-
-    select {
+    .react-datepicker-wrapper {
+      width: auto;
     }
   }
 }

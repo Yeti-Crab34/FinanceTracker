@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 const Expenses = (props) => {
     const {expensesList, changeExpensesList} = props;
@@ -9,6 +10,7 @@ const Expenses = (props) => {
     const [deleted, setDeleted] = useState(false);
     const [edited, setEdited] = useState(false);
     const [editId, setEditId] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
   
     const toggleEdit = async (e) => {
         setEditId(e.target.id);
@@ -105,6 +107,8 @@ const Expenses = (props) => {
     const addExpense = () => {
         if (item.length === 0) {alert('Please enter a valid item'); return;}
         if (!/^\d+\.{0,1}\d{0,2}$/.test(amount)) {alert('Please enter a valid amount'); return;}
+        console.log(recurrence)
+        if (recurrence === '') {alert('Please enter how often this occurs'); return;}
         // posting the expense to server
         axios.post('http://localhost:3002/addExpense', 
             {
@@ -112,6 +116,7 @@ const Expenses = (props) => {
                 amount: amount,
                 recurrence: recurrence,
                 id: userID,
+                created: startDate
             })
             .then((res) => {
                 console.log('Post Success true!');
@@ -176,9 +181,9 @@ const Expenses = (props) => {
             <select
               name="reoccurence"
               id="expenseRec"
-              defaultValue="Once"
               onChange={(e) => setRec(e.target.value)}
             >
+              <option >-</option>
               <option value="Once">Once</option>
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
@@ -219,8 +224,11 @@ const Expenses = (props) => {
                 <label >Amount: </label>
                 <input type="text" name="expenseAmount" id="expenseAmt" placeholder="Expense amount"
                 onChange={e => setAmt(e.target.value)}/>
+                <label>Date: </label>
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
                 <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
+                    <option>SELECT</option>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>
                     <option value='Weekly'>Weekly</option>

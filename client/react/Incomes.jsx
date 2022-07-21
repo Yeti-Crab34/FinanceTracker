@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar.jsx';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 const Incomes = (props) => {
   const { incomesList, changeIncomesList } = props;
-  console.log('Props: ', props)
+  // console.log('Props: ', props)
 
   const [userID, setID] = useState('');
   const [successfulPost, postSuccess] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [edited, setEdited] = useState(false);
   const [editId, setEditId] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
 
   const toggleEdit = async (e) => {
     setEditId(e.target.id);
@@ -120,12 +122,14 @@ const Incomes = (props) => {
       alert('Please enter a valid amount');
       return;
     }
+    if (recurrence === '') {alert('Please enter how often this occurs'); return;}
     axios
       .post('http://localhost:3002/addIncome', {
         item: item,
         amount: amount,
         recurrence: recurrence,
         id: userID,
+        created: startDate
       })
       .then((res) => {
         console.log('Post Success true!');
@@ -192,9 +196,9 @@ const Incomes = (props) => {
             <select
               name="reoccurence"
               id="expenseRec"
-              defaultValue="Once"
               onChange={(e) => setRec(e.target.value)}
             >
+              <option>-</option>
               <option value="Once">Once</option>
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
@@ -224,6 +228,7 @@ const Incomes = (props) => {
     }
   }
 
+
   // renders all the income a user has and the input fields for adding a new income
   return (
     <div className="income-page">
@@ -246,6 +251,8 @@ const Incomes = (props) => {
           id="incomeAmt"
           onChange={(e) => setAmt(e.target.value)}
         />
+        <label>Date: </label>
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
         <label>Reoccuring? </label>
         <select
           name="reoccurence"
@@ -253,6 +260,7 @@ const Incomes = (props) => {
           defaultValue="Once"
           onChange={(e) => setRec(e.target.value)}
         >
+          <option>-</option>
           <option value="Once">Once</option>
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
