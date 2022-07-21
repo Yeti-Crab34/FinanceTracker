@@ -45,35 +45,36 @@ income_expenseController.addExpense = async (req, res, next) => {
     const expQuery = await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('could not add expense');
+    return next('Error: Unable to add expense');
   }
 };
 
 // adding functionality to update an expense
 income_expenseController.updateExpense = async (req, res, next) => {
   try {
-    const { item, amount, recurrence, id, user_id } = req.body;
-    const params = [amount, recurrence, item, user_id];
+    const { itemID } = req.params;
+    const { item, value, recurring } = req.body;
+    const params = [value, recurring, item, itemID];
     const sqlQuery = `
-      UPDATE Expense SET value = $1, recurring = $2 WHERE item = $3 AND user_id = $4;
-      `;
+      UPDATE Expense SET value = $1, recurring = $2, item = $3 WHERE _id = $4;`;
     await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('could not update expense');
+    return next('Error: Unable to update expense');
   }
 };
 
 // adding functionality to remove expense
 income_expenseController.removeExpense = async (req, res, next) => {
   try {
-    const { item, user_id } = req.body;
-    const params = [item, user_id];
-    const sqlQuery = `DELETE FROM Expense WHERE item = $1 AND user_id = $2;`;
+    const { id } = req.params;
+    const params = [id];
+    // console.log('item', item, 'user_id', user_id);
+    const sqlQuery = `DELETE FROM Expense WHERE _id = $1;`;
     await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('could not remove expense');
+    return next('Error: Unable to remove expense');
   }
 };
 
@@ -89,14 +90,13 @@ income_expenseController.addIncome = async (req, res, next) => {
     const incQuery = await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('could not add income');
+    return next('Error: Unable to add income');
   }
 };
 
 // adding functionality to update an income
 income_expenseController.updateIncome = async (req, res, next) => {
   try {
-    console.log('Getting here!!!!!');
     const { itemID } = req.params;
     const { item, value, recurring } = req.body;
     const params = [value, recurring, item, itemID];
@@ -105,7 +105,7 @@ income_expenseController.updateIncome = async (req, res, next) => {
     await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('could not update income');
+    return next('Error: Unable to update income');
   }
 };
 
@@ -119,7 +119,7 @@ income_expenseController.removeIncome = async (req, res, next) => {
     await User.query(sqlQuery, params);
     return next();
   } catch {
-    return next('Error: Was not able to remove income');
+    return next('Error: Unable to remove income');
   }
 };
 

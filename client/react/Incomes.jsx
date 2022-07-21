@@ -4,19 +4,20 @@ import axios from 'axios';
 
 const Incomes = (props) => {
   const { incomesList, changeIncomesList } = props;
+  console.log('Props: ', props)
+
   const [userID, setID] = useState('');
   const [successfulPost, postSuccess] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [edited, setEdited] = useState(false);
   const [editId, setEditId] = useState('');
 
-  //NEW UD OPERATIONS
   const toggleEdit = async (e) => {
     setEditId(e.target.id);
   };
 
   const deletePost = async (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     const id = document.cookie.slice(document.cookie.indexOf('=') + 1);
     //axios delete request passing in id as a param
     try {
@@ -37,7 +38,7 @@ const Incomes = (props) => {
     e.preventDefault();
     const id = document.cookie.slice(document.cookie.indexOf('=') + 1);
     //grab the new values
-    console.log('e: ', e);
+    // console.log('e: ', e);
 
     const incomeName = e.target[0].value
       ? e.target[0].value
@@ -50,7 +51,7 @@ const Incomes = (props) => {
       ? e.target[2].value
       : e.target[2].defaultValue;
 
-    console.log(parseInt(e.target.id));
+    // console.log(parseInt(e.target.id));
 
     try {
       axios.patch(
@@ -85,7 +86,6 @@ const Incomes = (props) => {
   //----------Use Effect-----------------------------------------
   useEffect(() => {
     const id = document.cookie.slice(document.cookie.indexOf('=') + 1);
-    // postSuccess(false);
     setID(id);
 
     // Get request for expenses of this account:
@@ -128,7 +128,7 @@ const Incomes = (props) => {
         id: userID,
       })
       .then((res) => {
-        console.log('now true!');
+        console.log('Post Success true!');
         postSuccess(true);
       })
       .catch((err) => {
@@ -144,14 +144,16 @@ const Incomes = (props) => {
 
   //   CREATING THE NEW DIV - THIS PART CAN BE PUT INTO A SEPARATE COMPONENT!!!
   const incomeArr = [];
+  // console.log('IncomesList: ', incomesList)
   for (const income of incomesList) {
-    console.log(income);
+    // console.log('Income: ', income);
     if (income._id !== parseInt(editId)) {
       incomeArr.push(
         <div className="incomeItem">
           <span className="incomeName">{income.item} </span>
           <span className="incomeAmt">{income.value}</span>
           <span className="recurring">Occurs {income.recurring}</span>
+          <span className="incomeDate">{income.created.slice(0,10)}</span>
           <span>
             <button
               id={income._id}
@@ -173,7 +175,7 @@ const Incomes = (props) => {
         </div>
       );
     } else {
-      console.log('editing');
+      console.log('Editing Mode');
       incomeArr.push(
         <form id={income._id} onSubmit={submitEdit}>
           <div className="incomeItem">
@@ -199,6 +201,8 @@ const Incomes = (props) => {
               <option value="Monthly">Monthly</option>
               <option value="Annually">Annually</option>
             </select>
+            <span className="incomeDate">{income.created.slice(0,10)}</span>
+
             <span>
               <button id={income._id} type="submit" className="editButton">
                 Confirm

@@ -52,7 +52,7 @@ userRouter.patch(
 );
 
 userRouter.patch(
-  '/updateExpense',
+  '/updateExpense/:itemID',
   income_expenseController.updateExpense,
   (req, res) => {
     return res.status(200).send('success');
@@ -68,7 +68,7 @@ userRouter.delete(
 );
 
 userRouter.delete(
-  '/removeExpense',
+  '/removeExpense/:id',
   income_expenseController.removeExpense,
   (req, res) => {
     return res.status(200).send('success');
