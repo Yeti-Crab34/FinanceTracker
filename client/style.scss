@@ -361,6 +361,30 @@ body {
       }*/
       }
     }
+    .charts {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      
+      select {
+        /* Reset Select */
+        appearance: none;
+        font-size: 16px;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        background-color: transparent;
+      }
+      /* Custom Select wrapper */
+      .select {
+        position: relative;
+        display: flex;
+        border-radius: .25em;
+        overflow: hidden;
+        background-color: #c4cfbb;
+      }
+      
+    }
 
     .expenses {
       grid-area: expenses;

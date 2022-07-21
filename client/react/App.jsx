@@ -64,7 +64,7 @@ const App = () => {
                 <div>Roy Jiang</div>
                 <div>David Kagan</div>
               </div>}/>
-              < Route path="/" element={< Dashboard expenses={expenses} changeExpenses={changeExpenses} incomes={incomes} changeIncomes={changeIncomes} name={name} changeName={changeName}/>}/>
+              < Route path="/" element={< Dashboard expensesList={expensesList} changeExpensesList={changeExpensesList} incomesList={incomesList} changeIncomesList={changeIncomesList} name={name} changeName={changeName}/>}/>
               < Route path="*" element={< Error />}/>
             </ Routes >
       
