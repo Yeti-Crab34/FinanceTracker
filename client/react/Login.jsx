@@ -98,7 +98,7 @@ const Login = props => {
                 <input type="text" placeholder="Full Name" onChange={e => setFullName(e.target.value)}/>
                 <input id="email" type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
                 <input id="password" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
-                <input type="text" placeholder="Confirm Password" />
+                <input type="password" placeholder="Confirm Password" />
               </div>
               <button id="signup" onClick={signUpBtn}>Sign up</button>
               {/* Button to shift over to login page */}
