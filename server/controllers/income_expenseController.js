@@ -7,24 +7,24 @@ const income_expenseController = {};
 income_expenseController.getUser = async (req, res, next) => {
   try {
     const target_id = req.query.user_id;
-    console.log(target_id);
     const sqlQuery = `SELECT * FROM Users WHERE _id='${target_id}'`;
     const currUser = await User.query(sqlQuery);
-    //console.log(currUser.rows[0]);
-    const expQuery = `SELECT * FROM Expense WHERE user_id=${target_id} ORDER BY created ASC` ;
-    const expenses = await User.query(expQuery);
-    //console.log(expenses.rows);
+    res.locals.currUser = currUser.rows[0].fullname;
+    return next();
+  } catch {
+    console.log('caught');
+    return next('could not get user');
+  }
+};
+
+income_expenseController.getIncome = async (req, res, next) => {
+  try {
+    const target_id = req.query.user_id;
     const incQuery = `SELECT * FROM Income WHERE user_id=${target_id} ORDER BY created ASC` ;
     const incomes = await User.query(incQuery);
     const totalIncQuery = `SELECT value FROM Income WHERE user_id=${target_id}` ;
-    const totalExpQuery = `SELECT value FROM Expense WHERE user_id=${target_id}`;
     const totalInc = await User.query(totalIncQuery);
-    const totalExp = await User.query(totalExpQuery);
-    res.locals.currUser = currUser.rows[0].fullname;
-    res.locals.currExpenses = expenses.rows;
     res.locals.currIncomes = incomes.rows;
-
-    res.locals.totalExpenses = totalExp.rows;
     res.locals.totalIncomes = totalInc.rows;
     return next();
   } catch {
@@ -32,6 +32,25 @@ income_expenseController.getUser = async (req, res, next) => {
     return next('could not get user');
   }
 };
+
+income_expenseController.getExpenses = async (req, res, next) => {
+  try {
+    const target_id = req.query.user_id;
+    const expQuery = `SELECT * FROM Expense WHERE user_id=${target_id} ORDER BY created ASC` ;
+    const expenses = await User.query(expQuery);
+    const totalExpQuery = `SELECT value FROM Expense WHERE user_id=${target_id}`;
+    const totalExp = await User.query(totalExpQuery);
+
+    res.locals.currExpenses = expenses.rows;
+    res.locals.totalExpenses = totalExp.rows;
+    return next();
+  } catch {
+    console.log('caught');
+    return next('could not get user');
+  }
+};
+
+
 
 //inserts new expenses into the expense db
 income_expenseController.addExpense = async (req, res, next) => {

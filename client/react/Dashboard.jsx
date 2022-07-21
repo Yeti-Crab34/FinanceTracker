@@ -19,7 +19,8 @@ const Dashboard = props => {
     */ 
     useEffect(() => {
         const id = document.cookie.slice(document.cookie.indexOf('=') + 1); 
-        axios.get('http://localhost:3002/info', 
+        const getUser = () => {
+         axios.get('http://localhost:3002/infoUser', 
             {
                 params: {
                     user_id: id,
@@ -29,25 +30,52 @@ const Dashboard = props => {
         .then((res, err) => {
             if(err) console.log('err:', err); 
             else {
-                // creating expenses to update expenses state
-                // creating incomes to update incomes state
-                changeExpensesList(res.data.currExpenses)
-                changeIncomesList(res.data.currIncomes)
-
-                let totalExpenses = 0;
-                res.data.totalExpenses.forEach(expense => {
-                    totalExpenses += parseInt(expense.value.slice(1).replace(/,/g, ''));
-                });
-                let totalIncomes = 0;
-                res.data.totalIncomes.forEach(income => {
-                    totalIncomes += parseInt(income.value.slice(1).replace(/,/g, '')); 
-                });
-                changeTotalExpenses(totalExpenses);
-                changeTotalIncomes(totalIncomes);
-
-                changeName(res.data.currUser);
+              changeName(res.data.currUser);
+            }});
+          }
+        const getIncome = () => {
+         axios.get('http://localhost:3002/infoIncome',
+            {
+              params: {
+                user_id: id
+              }
             }
-        }); 
+        )
+        .then((res, err) => {
+          if(err) console.log('err:', err); 
+          else {
+            changeIncomesList(res.data.currIncomes);
+            let totalIncomes = 0;
+            res.data.totalIncomes.forEach(income => {
+                totalIncomes += parseInt(income.value.slice(1).replace(/,/g, '')); 
+            });
+            changeTotalIncomes(totalIncomes);
+
+          }});
+        }
+      const getExpenses = () => {
+       axios.get('http://localhost:3002/infoExpenses',
+          {
+            params: {
+              user_id: id
+            }
+          }
+      )
+      .then((res, err) => {
+        if(err) console.log('err:', err); 
+        else {
+          changeExpensesList(res.data.currExpenses);
+          let totalExpenses = 0;
+          res.data.totalExpenses.forEach(income => {
+              totalExpenses += parseInt(income.value.slice(1).replace(/,/g, '')); 
+          });
+          changeTotalExpenses(totalExpenses);
+
+        }});
+      }
+      getUser();
+      getIncome();
+      getExpenses();
     }, [chart]);
 
     const handleChartChange = (e) => {

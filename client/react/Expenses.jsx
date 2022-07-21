@@ -88,7 +88,7 @@ const Expenses = (props) => {
     //Only make this request IF we are not in edit
     //if (!editMode) then do get request
     axios
-      .get('http://localhost:3002/info', {
+      .get('http://localhost:3002/infoExpenses', {
         params: {
           user_id: id,
         },
