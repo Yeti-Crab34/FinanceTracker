@@ -17,6 +17,7 @@ const userRouter = require('./routers/userRouter');
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+//to avoid axios CORS errors IN development
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:8080");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
