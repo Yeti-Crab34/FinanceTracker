@@ -3,6 +3,7 @@ import NavBar from './NavBar.jsx';
 import axios from 'axios';
 import { Chart, Doughnut } from 'react-chartjs-2';
 import DoughnutComponent from './Charts/Doughnut.jsx'
+import LineComponent from './Charts/LineChart.jsx';
 import 'chart.js/auto'
 
 
@@ -113,7 +114,7 @@ const Dashboard = props => {
                   (() => {
                     console.log(chart)
                     if (chart === 'Doughnut') return <DoughnutComponent totalIncomes={totalIncomes} totalExpenses={totalExpenses}/>;
-                    else if (chart === 'Line') return <h1>Line</h1>
+                    else if (chart === 'Line') return <LineComponent incomesList={incomesList} expensesList={expensesList}/>;
                     else if (chart === 'Bar') return <h1>Bar</h1>
                     else if (chart === 'Area') return <h1>Area</h1>
                     else return <DoughnutComponent totalIncomes={totalIncomes} totalExpenses={totalExpenses}/>;
