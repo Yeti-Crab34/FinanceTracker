@@ -58,12 +58,15 @@ const Expenses = (props) => {
               value: Number(expenseAmt.replace(/[^0-9.-]+/g, '')),
               recurring: recurring,
             }
-          );
+          )
+          .then((res,err)=> {        
+            setEdited(!edited);
+          });
         } catch (error) {
           console.log('Edit Error');
         }
     
-        setEdited(!edited);
+
         cancelEdit();
       };
     
