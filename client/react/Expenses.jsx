@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const Expenses = (props) => {
     const {expensesList, changeExpensesList} = props;
-    console.log('Props: ', props)
     const [userID, setID] = useState('');
     const [successfulPost, postSuccess] = useState('')
     const [deleted, setDeleted] = useState(false);
