@@ -102,7 +102,7 @@ const Dashboard = props => {
                             },
                             aspectRatio: 1,
                             responsive: true,
-                        }}>
+                        }} data-testid='Doughnut'>
                         </Doughnut>
                     </div>
                 </div>

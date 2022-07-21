@@ -51,10 +51,71 @@ describe('Unit testing React components', () => {
       text = render(<Dashboard/>,{wrapper: BrowserRouter});
     });
 
-    test('Dashboard Renders in correctly',async () => {
-      let myDiv = document.querySelector('div');
-      console.log(myDiv, 'topDiv');
+    test('Doughnut graph renders in correctly ',async () => {
+      let myDiv = await document.getElementsByClassName('titleName');
+      expect(myDiv[0]).toHaveTextContent('Finance Tracker');
+
+      let myDiv2 = await screen.getByTestId('Doughnut');
+      expect(myDiv2).toBeInTheDocument(); // true if program renders donught graph to page
       // console.log(await screen.getByText('Dashboard'));
     });
   });
+
+  describe('Expenses', () => {
+    // let text;
+    const props = {
+      user_id : 1
+    };
+
+    beforeAll(() => {
+      text = render(<Expenses/>,{wrapper: BrowserRouter});
+    });
+
+    test('Expenses Renders in correctly',async () => {
+      let expenseAmountDiv = await document.getElementsByClassName('expenseAmount');
+      expect(expenseAmountDiv).toBeDefined();
+    });
+
+    // test('Expense calls setRec on Change', async () =>{
+    //   //render expense component, pass in props, then fireEvent change, and expect fn to have ben called once toHaveBeenCalledTimes()
+    // });
+  });
+
+  describe('Incomes', () => {
+    // let text;
+   
+
+    beforeAll(() => {
+      text = render(<Incomes/>,{wrapper: BrowserRouter});
+    });
+
+    test('Incomes Renders in correctly',async () => {
+      let expenseRecDiv = await document.getElementById('expenseRec');
+      expect(expenseRecDiv).toBeDefined();
+    });
+
+    // test('Incomes calls setRec on Change', async () =>{
+    //   //render expense component, pass in props, then fireEvent change, and expect fn to have ben called once toHaveBeenCalledTimes()
+    // });
+  });
+
+  describe('Login', () => {
+    // let text;
+   
+
+    beforeAll(() => {
+      text = render(<Login/>,{wrapper: BrowserRouter});
+    });
+
+    test('Login Renders in correctly',async () => {
+      let emailDiv = await document.getElementById('email');
+      expect(emailDiv).toBeInTheDocument();
+    });
+
+    // test('Incomes calls setRec on Change', async () =>{
+    //   //render expense component, pass in props, then fireEvent change, and expect fn to have ben called once toHaveBeenCalledTimes()
+    // });
+  });
+
+
 });
