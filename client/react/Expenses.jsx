@@ -48,6 +48,9 @@ const Expenses = (props) => {
           : e.target[2].defaultValue;
     
         try {
+          if (expenseName.length === 0) {alert('Please enter a valid item'); return;}
+          if (!/^\d+\.{0,1}\d{0,2}$/.test(expenseAmt)) {alert('Please enter a valid amount'); return;}
+          if (recurring === '') {alert('Please enter how often this occurs'); return;}
           axios.patch(
             `http://localhost:3002/updateExpense/${parseInt(e.target.id)}`,
             {
@@ -102,13 +105,11 @@ const Expenses = (props) => {
     // declaring input field states for adding an expense
     const [item, setItem] = useState('');
     const [amount, setAmt] = useState('');
-    const [recurrence, setRec] = useState('');
+    const [recurrence, setRec] = useState('Once');
 
     const addExpense = () => {
         if (item.length === 0) {alert('Please enter a valid item'); return;}
         if (!/^\d+\.{0,1}\d{0,2}$/.test(amount)) {alert('Please enter a valid amount'); return;}
-        console.log(recurrence)
-        if (recurrence === '') {alert('Please enter how often this occurs'); return;}
         // posting the expense to server
         axios.post('http://localhost:3002/addExpense', 
             {
@@ -183,7 +184,6 @@ const Expenses = (props) => {
               id="expenseRec"
               onChange={(e) => setRec(e.target.value)}
             >
-              <option >-</option>
               <option value="Once">Once</option>
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
@@ -228,7 +228,6 @@ const Expenses = (props) => {
                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
                 <label >Reoccuring? </label>
                 <select name='reoccurence' id="expenseRec" onChange={e => setRec(e.target.value)}>
-                    <option>SELECT</option>
                     <option value='Once'>Once</option>
                     <option value='Daily'>Daily</option>
                     <option value='Weekly'>Weekly</option>

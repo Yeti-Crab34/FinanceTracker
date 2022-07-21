@@ -56,6 +56,8 @@ const Incomes = (props) => {
     // console.log(parseInt(e.target.id));
 
     try {
+      if (incomeName.length === 0) {alert('Please enter a valid item'); return;}
+      if (!/^\d+\.{0,1}\d{0,2}$/.test(incomeAmt)) {alert('Please enter a valid amount'); return;}
       axios.patch(
         `http://localhost:3002/updateIncome/${parseInt(e.target.id)}`,
         {
@@ -111,7 +113,7 @@ const Incomes = (props) => {
   // declaring input field states for adding an expense
   const [item, setItem] = useState('');
   const [amount, setAmt] = useState('');
-  const [recurrence, setRec] = useState('');
+  const [recurrence, setRec] = useState('Once');
 
   const addIncome = () => {
     if (item.length === 0) {
@@ -122,7 +124,6 @@ const Incomes = (props) => {
       alert('Please enter a valid amount');
       return;
     }
-    if (recurrence === '') {alert('Please enter how often this occurs'); return;}
     axios
       .post('http://localhost:3002/addIncome', {
         item: item,
@@ -198,7 +199,6 @@ const Incomes = (props) => {
               id="expenseRec"
               onChange={(e) => setRec(e.target.value)}
             >
-              <option>-</option>
               <option value="Once">Once</option>
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
@@ -257,15 +257,14 @@ const Incomes = (props) => {
         <select
           name="reoccurence"
           id="expenseRec"
-          defaultValue="Once"
-          onChange={(e) => setRec(e.target.value)}
-        >
-          <option>-</option>
+          defaultValue="-"
+          onChange={(e) => setRec(e.target.value)}>
           <option value="Once">Once</option>
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
           <option value="Monthly">Monthly</option>
           <option value="Annually">Annually</option>
+
         </select>
         <button onClick={addIncome}>Add Income</button>
       </div>
