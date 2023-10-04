@@ -3,22 +3,22 @@
 @import url(https://fonts.googleapis.com/css?family=Bungee+Outline:regular);
 @import url(https://fonts.googleapis.com/css?family=Bebas+Neue:regular);
 @import url(https://fonts.googleapis.com/css?family=Encode+Sans:400,500,600,700,800,900);
+@import "react-datepicker/dist/react-datepicker.css";
 
-
-$beige: #E0DCD1;
-$lightBeige: #F2EEE3;
+$beige: #e0dcd1;
+$lightBeige: #f2eee3;
 $darkBeige: #c4cfbb;
-$lightGray: #9C9C9C;
+$lightGray: #9c9c9c;
 $darkGray: #514963;
 $offBlack: rgb(25, 25, 25);
 
 body {
-    height: 100%;
-    width: 100% !important;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    margin-left: 0;
-  }
+  height: 100%;
+  width: 100% !important;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 0;
+}
 
 .App {
   display: flex;
@@ -60,7 +60,7 @@ body {
   transform: translate(-50%, 0%);
   width: 40vw;
   font-family: 'Encode Sans';
-  font-size: .7em;
+  font-size: 0.7em;
   background: $beige;
   // background: linear-gradient(90deg, rgb(133, 133, 133) 0%, rgba(242,238,227,1) 100%);
   text-align: center;
@@ -83,8 +83,7 @@ body {
   }
 }
 
-.loginContent{
-
+.loginContent {
   .backRight {
     position: absolute;
     right: 0;
@@ -93,7 +92,7 @@ body {
     background-size: cover;
     background-position: 100% 50%;
   }
-  
+
   .backLeft {
     position: absolute;
     left: 0;
@@ -102,14 +101,14 @@ body {
     background-size: cover;
     background-position: 50% 50%;
   }
-  
+
   #back {
     width: 100%;
     height: 98%;
     position: absolute;
     z-index: -999;
   }
-  
+
   #slideBox {
     width: 50%;
     max-height: 100%;
@@ -117,7 +116,7 @@ body {
     overflow: hidden;
     margin-left: 50%;
     position: absolute;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
   .topLayer {
     width: 200%;
@@ -126,15 +125,15 @@ body {
     left: 0;
     left: -100%;
   }
-  
+
   .left {
     width: 50%;
     height: 100%;
-    background: #2C3034;
+    background: #2c3034;
     left: 0;
     position: absolute;
   }
-  
+
   .right {
     width: 50%;
     height: 100%;
@@ -142,7 +141,7 @@ body {
     right: 0;
     position: absolute;
   }
-  
+
   .content {
     width: 250px;
     margin: 0 auto;
@@ -151,24 +150,28 @@ body {
     left: 50%;
     margin-left: -125px;
   }
-  
+
   .content h2 {
-    color: #03A9F4;
+    color: #03a9f4;
     font-weight: bold;
     font-size: 35px;
   }
 
-  #login, #signup {
-    background: #03A9F4;
+  #login,
+  #signup {
+    background: #03a9f4;
     color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
   }
 
-  #goRight, #goLeft, #login, #signup {
+  #goRight,
+  #goLeft,
+  #login,
+  #signup {
     padding: 10px 16px;
     width: auto;
     font-weight: 600;
-    text-transform:  uppercase;
+    text-transform: uppercase;
     font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.5px;
@@ -178,78 +181,102 @@ body {
     margin: 15px 15px 15px 0;
     transition: all 0.25s;
   }
-  
- #login:hover, #signup:hover {
-    background: #0288D1;
-    box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+
+  #login:hover,
+  #signup:hover {
+    background: #0288d1;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  #goRight , #goLeft {
-    color: #03A9F4;
+  #login:active,
+  #signup:active {
+    background: #00669d;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+
+  #goRight,
+  #goLeft {
+    color: #03a9f4;
   }
 
   #goRight:hover {
-  box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.2);
-}
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 
   #goLeft {
     background: inherit;
 
     &:hover {
-      box-shadow: 0 4px 7px rgba(0,0,0,0.3), 0 3px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.2);
     }
   }
 
-    // Login page slide animations
-      .anim-slide-left {
-        animation: slide-left .7s;
-        animation-fill-mode: forwards;
-      }
-      @keyframes slide-left {
-        from {margin-left : 50%}
-        to {margin-left : 0%}
-      }
-      .anim-login-slide-left {
-        animation: login-slide-left .7s;
-        animation-fill-mode: forwards;
-      }
-      @keyframes login-slide-left {
-        from {margin-left : 0%}
-        to {margin-left : 100%}
-      }
-      .anim-slide-right {
-        animation: slide-right .7s;
-        animation-fill-mode: forwards;
-      }
-      @keyframes slide-right {
-        from {margin-left : 0%}
-        to {margin-left : 50%}
-      }
-      .anim-login-slide-right {
-        animation: login-slide-right .7s;
-        animation-fill-mode: forwards;
-      }
-      @keyframes login-slide-right {
-        from {margin-left : 100%}
-        to {margin-left : 0%}
-      }
-  
+  // Login page slide animations
+  .anim-slide-left {
+    animation: slide-left 0.7s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes slide-left {
+    from {
+      margin-left: 50%;
+    }
+    to {
+      margin-left: 0%;
+    }
+  }
+  .anim-login-slide-left {
+    animation: login-slide-left 0.7s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes login-slide-left {
+    from {
+      margin-left: 0%;
+    }
+    to {
+      margin-left: 100%;
+    }
+  }
+  .anim-slide-right {
+    animation: slide-right 0.7s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes slide-right {
+    from {
+      margin-left: 0%;
+    }
+    to {
+      margin-left: 50%;
+    }
+  }
+  .anim-login-slide-right {
+    animation: login-slide-right 0.7s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes login-slide-right {
+    from {
+      margin-left: 100%;
+    }
+    to {
+      margin-left: 0%;
+    }
+  }
+
   .right .off:hover {
     background: #eee;
-    color: #03A9F4;
+    color: #03a9f4;
     box-shadow: none;
   }
   .left .off:hover {
     box-shadow: none;
-    color: #03A9F4;
-    background: #363A3D;
+    color: #03a9f4;
+    background: #363a3d;
   }
 
   input {
     background: transparent;
     border: 0;
     outline: 0;
-    border-bottom: 1px solid #45494C;
+    border-bottom: 1px solid #45494c;
     font-size: 14px;
     color: #959595;
     padding: 8px 0;
@@ -270,114 +297,141 @@ body {
 }
 
 .homepage {
-height: auto;
+  height: auto;
 
-.titleName {
-  font-size: 3rem;
-  margin: 3px 0px 5px 4px;
-  color: #003755;
-  font-family: 'Encode Sans';
-  padding: 0px 10px;
-  font-weight: 800;
-  border-radius: 6px;
-}
+  .titleName {
+    font-size: 3rem;
+    margin: 3px 0px 5px 4px;
+    color: #003755;
+    font-family: 'Encode Sans';
+    padding: 0px 10px;
+    font-weight: 800;
+    border-radius: 6px;
+  }
 
-.nav {
-  border-radius: 15px;
-  border: solid black 1px; 
-  background-color: rgba(12, 12, 12, 0.89);
-  margin: 0px 0px 1.5vh 3px;
-  display: inline-flex;
-  justify-content: space-evenly;
-  width: 98.5vw;
-  div {
-    
-    height: 100%;
-    // padding: 0.5rem;
-    // margin: 0.5rem;
-    padding: .7rem 1.2rem;
-    margin: 0.2rem;
+  .nav {
     border-radius: 15px;
-    .nav-link {
-      text-decoration: none;
-      color: $lightBeige;
-      text-align: center;
-    }
-  }
-  div:hover {
-    background-color: rgba(255, 255, 255, 0.428);
-    .nav-link {
-      color: black;
-    }
-  }
-}
-
-.dashboardcontainer {  
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "Graph expenses"
-    "Graph incomes";
-
-  max-height: 80vh;
-
-  
-  .Graph {
-    grid-area: Graph; 
-    background-color: rgba(255, 255, 255, 0.844);
-    border-radius: 15px; 
-    margin:3px;
-    .chartWrapper {
-      display: block;
-      position: relative;
-      width: 60%;
-      margin: 2.5% auto;
-      /*canvas {
-        margin-left: 50%;
-        margin-top: 30%;
-      }*/
-    }
-  }
-
-  .expenses { 
-    grid-area: expenses;
-    overflow-y: scroll;
-  }
-  
-  .incomes {
-    grid-area: incomes; 
-    overflow-y: scroll;
-  }
-
-  .expenses::-webkit-scrollbar, .incomes::-webkit-scrollbar {
-    display: none; 
-  }
-
-  .expenses, .incomes {
-    border-radius: 15px;
-    border: solid black 1px; 
-    background-color: rgba(255, 255, 255, 0.844);
-    margin: 5px 3px;
-    
-    .expenseItem, .incomeItem {
-      margin: 2.5%;
+    border: solid black 1px;
+    background-color: rgba(12, 12, 12, 0.89);
+    margin: 0px 0px 1.5vh 3px;
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 98.5vw;
+    div {
+      height: 100%;
+      // padding: 0.5rem;
+      // margin: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      margin: 0.2rem;
       border-radius: 15px;
-      padding: 5px;
-      border: solid black 1px;
-
-      .expenseName {
-        white-space: nowrap
+      .nav-link {
+        text-decoration: none;
+        color: $lightBeige;
+        text-align: center;
+      }
+    }
+    div:hover {
+      background-color: rgba(255, 255, 255, 0.428);
+      .nav-link {
+        color: black;
       }
     }
   }
-}}
 
-.expenses-page, .income-page{
+  .dashboardcontainer {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      'Graph expenses'
+      'Graph incomes';
+
+    max-height: 80vh;
+
+    .Graph {
+      grid-area: Graph;
+      background-color: rgba(255, 255, 255, 0.844);
+      border-radius: 15px;
+      margin: 3px;
+      .chartWrapper {
+        display: block;
+        position: relative;
+        width: 60%;
+        margin: 2.5% auto;
+        /*canvas {
+        margin-left: 50%;
+        margin-top: 30%;
+      }*/
+      }
+    }
+    .charts {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      
+      select {
+        /* Reset Select */
+        appearance: none;
+        font-size: 16px;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        background-color: transparent;
+      }
+      /* Custom Select wrapper */
+      .select {
+        position: relative;
+        display: flex;
+        border-radius: .25em;
+        overflow: hidden;
+        background-color: #c4cfbb;
+      }
+      
+    }
+
+    .expenses {
+      grid-area: expenses;
+      overflow-y: scroll;
+    }
+
+    .incomes {
+      grid-area: incomes;
+      overflow-y: scroll;
+    }
+
+    .expenses::-webkit-scrollbar,
+    .incomes::-webkit-scrollbar {
+      display: none;
+    }
+
+    .expenses,
+    .incomes {
+      border-radius: 15px;
+      border: solid black 1px;
+      background-color: rgba(255, 255, 255, 0.844);
+      margin: 5px 3px;
+
+      .expenseItem,
+      .incomeItem {
+        margin: 2.5%;
+        border-radius: 15px;
+        padding: 5px;
+        border: solid black 1px;
+
+        .expenseName {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+.expenses-page,
+.income-page {
   display: block;
 
   .history-container {
@@ -388,13 +442,22 @@ height: auto;
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 2px 2px 10px rgb(0, 0, 0);
 
-    .expenseItem, .incomeItem{
+    .expenseItem,
+    .incomeItem {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      
+      grid-template-columns: 1fr 1fr 1fr 1fr 80px 80px;
+
       span {
         border: 1px solid black;
-        padding: 3px
+        padding: 3px;
+      }
+      button {
+        width: 100%;
+      }
+      input,
+      option,
+      select {
+        font-size: inherit;
       }
     }
   }
@@ -402,20 +465,16 @@ height: auto;
   .input-div {
     background-color: #003755;
     padding: 8px;
-    display: flex; 
+    display: flex;
     justify-content: space-around;
 
-    label{
+    label {
       color: white;
       text-align: center;
       margin: auto;
     }
-    input {
-      
-    }
-    
-    select{
-
+    .react-datepicker-wrapper {
+      width: auto;
     }
   }
 }
